@@ -5,7 +5,7 @@
 </div>
 <div align="center">
     <h2>🚀 About Me 🚀</h2>
-    <p>I'm a FIT CTU student, my specialization is Information Security.</p>
+    <p>I am a student at FIT CTU, specializing in Information Security.</p>
 </div>
 <div align="center">
     <h2>🌎 Connect with me 🌎</h2>
