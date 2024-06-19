@@ -21,11 +21,13 @@
     <img src="https://img.shields.io/badge/C-007396?style=for-the-badge&logo=java&logoColor=white" alt="java" />
     <img src="https://img.shields.io/badge/C++-007396?style=for-the-badge&logo=c++&logoColor=white" alt="C++" />
      <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Bash"/>
+    <img src="https://img.shields.io/badge/SQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
 </div>
+<div align="center">
 <h2 align="center" class="section-heading">🔧 Frameworks</h2>
 <p>This section outlines the frameworks I have experience with and regularly use.</p>
-<div align="center">
-  <img src="https://img.shields.io/badge/Burp suite-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="Burp suite"/>
+
+  <img src="https://img.shields.io/badge/Burp suite-20232A?style=for-the-badge&logo=burpsuite&logoColor=61DAFB" alt="Burp suite"/>
   <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git"/>
   <img src="https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Visual Studio Code"/>
   
