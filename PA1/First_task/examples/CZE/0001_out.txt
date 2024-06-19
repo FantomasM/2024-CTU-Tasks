@@ -1,0 +1,9 @@
+Cas prijezdu vlaku A:
+Cas odjezdu vlaku A:
+Cas prijezdu vlaku B:
+Cas odjezdu vlaku B:
+Cas prijezdu vlaku C:
+Cas odjezdu vlaku C:
+Z vlaku A lze prestoupit na vlaky B a C.
+Z vlaku B lze prestoupit na vlaky A a C.
+Z vlaku C lze prestoupit na vlak B.

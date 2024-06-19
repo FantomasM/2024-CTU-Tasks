@@ -1,0 +1,3 @@
+Cas prijezdu vlaku A:
+Cas odjezdu vlaku A:
+Nespravny vstup.
