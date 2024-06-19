@@ -1,0 +1,3 @@
+<h1>PA1-Programming and algorithmic 1</h1>
+<h2>Course Annotation</h2>
+<p>The goal of this module is to teach students how to develop algorithms to solve basic problems and how to convert these algorithms into programs in the C programming language. Next goal is to teach students practical skills in program testing and debugging. Course graduates understand data types (primitive, pointers, structures), statements, expressions, and functions in the C language. They understand the principles of recursion and algorithm complexity. Finally, students learn the basic algorithms for searching, sorting and linked lists processing.</p>
