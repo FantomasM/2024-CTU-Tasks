@@ -5,10 +5,16 @@
 #define ARRIVAL 0
 #define DEPARTURE 1
 
+#define Trains_count 3 //Should be >=2
+
 #define min_time 5 //minutes
 
 #define max_time 180 //minutes
 
+static char Train_name[Trains_count]={'A','B','C'};
+
+
+//Structure to hold train's departures and arrivals
 typedef struct Time_dep_arr{
     int hours;
     int minutes;
@@ -17,34 +23,44 @@ typedef struct Time_dep_arr{
     
 }TIME_DEP_ARR;
 
-int read_entry(int arr_or_dep,TIME_DEP_ARR *train,char sign){
+typedef struct Time_pair{
+    TIME_DEP_ARR * arr;
+    TIME_DEP_ARR * dep;
+}TIME_PAIR;
+
+
+bool Read_input(int arr_or_dep,TIME_DEP_ARR *train,char sign){
     if(arr_or_dep==ARRIVAL){
         printf("Cas prijezdu vlaku %c:\n",sign);
     }
     else if(arr_or_dep==DEPARTURE){
         printf("Cas odjezdu vlaku %c:\n",sign);
         }
+    else{
+        return false;
+    }
     int hours,minutes;
-    if(scanf("%d:%d",&hours,&minutes)!=2){
-        return 1;
+    //Time of dep/arr should be in format <0-23>:<0-59>
+    if(scanf("%d:%d",&hours,&minutes)!=2 
+    || hours > 23 || hours < 0 || minutes > 59 || minutes < 0 ){
+        return false;
     }
-    if(hours > 23 || hours < 0 ||
-    minutes > 59 || minutes < 0){
-        return 2;
-    }
+    
+    
     train->hours=hours;
     train->minutes=minutes;
     
     train->minutes_all=hours*60+minutes;
     
-  //  printf("Hours %d minutes %d minutesall %d \n",train->hours,train->minutes,train->minutes_all);
-    return 3;
+  
+    return true;
 
 
 }
-bool transfer_inside(int First_arr,int Second_arr, int Second_dep){
 
+bool is_transfer_from_first_to_second_possible(int First_arr,int Second_arr, int Second_dep){
 
+    
     if((abs(Second_dep-First_arr)>=min_time && ( (First_arr > Second_dep && abs(First_arr-Second_dep) > 24*60-abs(First_arr-Second_dep))||( // First has Problems with midnight
         First_arr < Second_dep && abs(First_arr-Second_dep) < 24*60-abs(First_arr-Second_dep) // NO problems with midnight
     ))) && ((abs(First_arr-Second_arr)<=max_time || max_time >=60*24-abs(First_arr-Second_arr)) ||
@@ -56,125 +72,155 @@ bool transfer_inside(int First_arr,int Second_arr, int Second_dep){
 
 
 }
+//Finding first element in bool array , which is true
+int Find_positive_index(bool * Transfers_bool, int elements_count){
+    if(Transfers_bool==NULL){
+        return -1;
+    }
+    for(int i=0;i<elements_count;i++){
+        if(Transfers_bool[i]){
+            return i;
+        }
+    }
+    return -1;
+    
+}
+void Print_possible_transfers(bool * transfers,int current_index){
+    if(transfers==NULL){
+        return;
+    }
+    
+    for(int i=0;i<Trains_count;i++){
+        int transfers_count=0;
+        bool Transfers_bool[Trains_count];
+        for(int z=0;z<Trains_count;z++){
+            if(i==z){ //We cannot establish transfer to the same train
+                Transfers_bool[z]=false;
+                continue;
+            }
+            if(transfers[current_index]){
+                transfers_count++;
+                Transfers_bool[z]=true;
+            }
+            else{
+                Transfers_bool[z]=false;
+            }
+            current_index++;
+        }
+        //No possible transfers
+        if(transfers_count==0){
+            printf("Z vlaku %c nelze prestupovat.\n",Train_name[i]);
+        }
+        //One possible transfer can be established
+        else if(transfers_count==1){
+            //Getting index of this Train to transfer
+            int first_pos_index=Find_positive_index(Transfers_bool,Trains_count);
+
+            if(first_pos_index<0 || first_pos_index >=Trains_count || first_pos_index==i){
+                printf("Failure occured in transfers evaluation.\n");
+                return;
+            }
+
+            printf("Z vlaku %c lze prestoupit na vlak %c.\n",Train_name[i],Train_name[first_pos_index]);
+        }
+        else{
+            printf("Z vlaku %c lze prestoupit na vlaky",Train_name[i]);
+            int count_of_transfers_printed=0;
+            for(int y=0;y<Trains_count;y++){
+                if(Transfers_bool[y]){
+                    if(count_of_transfers_printed==0){
+                        printf(" %c",Train_name[y]);
+                        count_of_transfers_printed++;
+                    }
+                    else{
+                        printf(" a %c",Train_name[y]);
+                    }
+
+                }
+                else{
+                    continue;
+                }
+            }
+            printf(".\n");
+        }
+    }
+
+}
 
 
-void transfer(TIME_DEP_ARR time[6]){
-    bool A_B=false,A_C=false,B_A=false,B_C=false,C_A=false,C_B=false;
-    TIME_DEP_ARR *A_arr_ptr=&time[0];
-    TIME_DEP_ARR *A_dep_ptr=&time[1];
-    TIME_DEP_ARR *B_arr_ptr=&time[2];
-    TIME_DEP_ARR *B_dep_ptr=&time[3];
-    TIME_DEP_ARR *C_arr_ptr=&time[4];
-    TIME_DEP_ARR *C_dep_ptr=&time[5];
-    if(transfer_inside(A_arr_ptr->minutes_all,B_arr_ptr->minutes_all,B_dep_ptr->minutes_all)){
-        A_B=true;
-    }
-    if(transfer_inside(A_arr_ptr->minutes_all,C_arr_ptr->minutes_all,C_dep_ptr->minutes_all)){
-        A_C=true;
-    }
-    if(transfer_inside(B_arr_ptr->minutes_all,A_arr_ptr->minutes_all,A_dep_ptr->minutes_all)){
-        B_A=true;
-    }
-    if(transfer_inside(B_arr_ptr->minutes_all,C_arr_ptr->minutes_all,C_dep_ptr->minutes_all)){
-        B_C=true;
-    }
-    if(transfer_inside(C_arr_ptr->minutes_all,A_arr_ptr->minutes_all,A_dep_ptr->minutes_all)){
-        C_A=true;
-    }
-    if(transfer_inside(C_arr_ptr->minutes_all,B_arr_ptr->minutes_all,B_dep_ptr->minutes_all)){
-        C_B=true;
-    }
 
-    if(A_B && A_C){
-        printf("Z vlaku A lze prestoupit na vlaky B a C.\n");
-    }
-    else if(A_B && !A_C){
-        printf("Z vlaku A lze prestoupit na vlak B.\n");
+void Find_possible_transfers(TIME_DEP_ARR * time){
+    
+   //Array with indicators, if transfer from one train to another is possible. For 3 Trains it will have structure like so:
+   // 0 - Transfer from First to Second
+   // 1 - Transfer from First to Third
+   // 2 - Transfer from Second to First
+   // 3 - Transfer from Second to Third
+   // 4 - Transfer from Third to First
+   // 5 - Transfer from Third to Second
+   // and so on for another amount of trains
+    bool transfers[Trains_count*(Trains_count-1)];
 
-    }
-    else if (!A_B && A_C)
-    {
-        printf("Z vlaku A lze prestoupit na vlak C.\n");
-    }
-    else{
-        printf("Z vlaku A nelze prestupovat.\n");
+    //Structure with Train arrival and departure
+    TIME_PAIR trains_info[Trains_count];
 
-    }
+    int counter=0;
 
-    if(B_A && B_C){
-        printf("Z vlaku B lze prestoupit na vlaky A a C.\n");
+    for(int i=0;i<Trains_count*2;i+=2){
+        trains_info[counter].arr=&time[i];
+        trains_info[counter].dep=&time[i+1];
+        counter++;
+    }
+    
+    int current_index=0;
 
+    //Evaluating possible transfers
+    for(int i=0;i<Trains_count;i++){
+        for(int z=0;z<Trains_count;z++){
+            //Transfer to the same train isn't an option
+            if(i==z){
+                continue;
+            }
+            //If possible transfer can be established, we indicate it in bool array.
+            if(is_transfer_from_first_to_second_possible(trains_info[i].arr->minutes_all,trains_info[z].arr->minutes_all,trains_info[z].dep->minutes_all)){
+                transfers[current_index]=true;
+            }
+            
+            else{
+                transfers[current_index]=false;
+            }
+            current_index++;
+        }
     }
-    else if(B_A && !B_C){
-        printf("Z vlaku B lze prestoupit na vlak A.\n");
-
-    }
-    else if (!B_A && B_C)
-    {
-        printf("Z vlaku B lze prestoupit na vlak C.\n");
-        
-    }
-    else{
-        printf("Z vlaku B nelze prestupovat.\n");
-
-    }
-
-     if(C_A && C_B){
-         printf("Z vlaku C lze prestoupit na vlaky A a B.\n");
-
-    }
-    else if(C_A && !C_B){
-        printf("Z vlaku C lze prestoupit na vlak A.\n");
-
-    }
-    else if (!C_A && C_B)
-    {
-        printf("Z vlaku C lze prestoupit na vlak B.\n");
-    }
-    else{
-        printf("Z vlaku C nelze prestupovat.\n");
-
-    }
+    current_index=0;
+    Print_possible_transfers(transfers,current_index);
+    
+   
+   
 
 }
 int main(void){
     TIME_DEP_ARR * time=(TIME_DEP_ARR*)malloc(6*sizeof(TIME_DEP_ARR));
+    if(time==NULL){
+        printf("Malloc failrue occured.\n");
+        return EXIT_FAILURE;
+    }
     //1 A arrival 
     //2 A departure 
     //3 B arrival and so on
-     for(int i=0;i<6;i++){
+     for(int i=0;i<Trains_count*2;i++){
         TIME_DEP_ARR * ptr=&time[i];
         char sign;
-        switch (i)
-        {
-        case 0:
-        sign='A';
-            break;
-        case 1:
-         sign='A';
-            break;
-        case 2:
-         sign='B';
-            break;
-        case 3:
-         sign='B';
-            break;
-        case 4:
-         sign='C';
-            break;
-        case 5:
-         sign='C';
-            break;                
+        sign=Train_name[i/2];
         
-        }
-        if((read_entry(i%2,ptr,sign)!=3)){
+        if((!Read_input(i%2,ptr,sign))){
             printf("Nespravny vstup.\n");
             free(time);
             return EXIT_FAILURE;
         }
 
     }
-    transfer(time);
+   Find_possible_transfers(time);
    
    
     
