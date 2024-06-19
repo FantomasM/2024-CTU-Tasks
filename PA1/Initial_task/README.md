@@ -1,3 +1,4 @@
+<h1>Zahřívací úloha</h1>
 <td class="lrtbCell" colspan="3" align="left"><p>Úkolem je vytvořit program, který bude zobrazovat vybrané citáty.</p>
 
 <p>Vstupem programu je jedno celé číslo. Toto číslo je z rozsahu 0 až 8 a 
