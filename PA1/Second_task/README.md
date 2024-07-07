@@ -1,7 +1,7 @@
 <td class="header"><b>SETI</b></td>
-<tr>
 
-        <td class="lrtbCell" colspan="3" align="left"><p>Úkolem je vytvořit program, který bude analyzovat vysílání mimozemských civilizací.</p>
+
+<td class="lrtbCell" colspan="3" align="left"><p>Úkolem je vytvořit program, který bude analyzovat vysílání mimozemských civilizací.</p>
 
 <p>Radioastronomům se podařilo zachytit zprávy mimozemských civilizací. Konečně. Zprávy přicházejí 
 od hvězd, které mají podobné charakteristiky, jako Slunce. Není pochyb.</p>
@@ -158,4 +158,4 @@ cbbc abcb|baa
 
 </td> 
 
-       </tr>
+       
