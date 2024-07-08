@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include <stdbool.h> //smazat pred nahranim na protgtest
+#include <stdbool.h> 
 #include <time.h>
 typedef struct TCell
 {
@@ -50,6 +50,9 @@ void initMatrix   ( TSPARSEMATRIX   * m )
 //Function expects right(N with 0) value of index
 TROWCOL * create_row(int index, TROWCOL * next){
     TROWCOL * new_row=(TROWCOL*)malloc(sizeof(TROWCOL));
+    if(new_row==NULL){
+        exit(EXIT_FAILURE);
+    }
     new_row->m_Cells=nullptr;
     new_row->m_Idx=index;
     new_row->m_Next=next;
@@ -59,6 +62,9 @@ TROWCOL * create_row(int index, TROWCOL * next){
 //function create new cell and  give it links to next cell in row and in column
 TCELL * create_cell(int data, TROWCOL * col, TROWCOL * row, TCELL * next,TCELL * down){
     TCELL * cell=(TCELL*)malloc(sizeof(TCELL));
+    if(cell==NULL){
+        exit(EXIT_FAILURE);
+    }
     cell->m_Data=data;
     cell->m_Col=col->m_Idx;
     cell->m_Row=row->m_Idx;
