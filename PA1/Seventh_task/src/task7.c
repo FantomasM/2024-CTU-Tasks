@@ -21,6 +21,9 @@ void init(List_of_convertors_t * ptr){
     ptr->count=0;
     ptr->allocated_size=2;
     ptr->convertors=(convertor_t*)malloc(ptr->allocated_size*sizeof(convertor_t));
+    if(ptr->convertors==NULL){
+        exit(EXIT_FAILURE);
+    }
 }
 ///------------------------------------------------------------------------------
 void free_all(List_of_convertors_t * ptr){
@@ -31,6 +34,9 @@ void realoc(List_of_convertors_t * ptr){
     
     ptr->allocated_size=ptr->allocated_size*4;
     ptr->convertors=(convertor_t*)realloc(ptr->convertors,ptr->allocated_size*sizeof(convertor_t));
+    if(ptr->convertors==NULL){
+        exit(EXIT_FAILURE);
+    }
 
 
 }
