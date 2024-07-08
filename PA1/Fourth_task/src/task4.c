@@ -57,16 +57,21 @@ bool Read_Input(array_t * ptr){
     }
         
     }
+    //EOF encountered, but fewer than two numbers were read.
     if(ptr->size < 2){
         return false;
     }
     return true;
 }
 //--------------------------------------------------------------
+//O(n^2) solution for finding longest sequence of numbers
 void Find_max(array_t * ptr){
     int max_length=0,cur_length=0;
     int size_of_max_int=0,max_size_of_max_int=2;
     max_interval_t * max_int=(max_interval_t*)malloc(2*sizeof(max_interval_t));
+    if(max_int == NULL){ //Allocation wasn't successful 
+        return;
+    }
     bool new_int=true;
     for(int i=0;i<ptr->size;i++){
      
@@ -144,6 +149,9 @@ void Find_max(array_t * ptr){
 //--------------------------------------------------------------
 int main (void){
 array_t * ptr=(array_t*)malloc(sizeof(array_t));
+if(ptr==NULL){
+    return EXIT_FAILURE;
+}
 array_init(ptr);
 if(!Read_Input(ptr)){
     printf("Nespravny vstup.\n");
