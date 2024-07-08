@@ -8,8 +8,11 @@ typedef struct
   int m_WorkDays;
 } TResult;
 #endif /* __PROGTEST__ */
+
+#define count_of_holidays 11
+//Gregorian calendar's version 
 bool is_leap(int year){
-  if( (year%4==0 && year%100!=0) || (year%4==0 && year%100==0 && year%400==0)){
+  if( (year%4==0 && year%100!=0) || (year%4==0 && year%100==0 && year%400==0 && year%4000!=0)){
     return true;
   }
   return false;
@@ -19,21 +22,20 @@ bool is_leap(int year){
 int Days_in_month(int year, int month){
  switch (month)
  {
- case 1:return 31;break;
+ 
   case 2:
   if(is_leap(year))return 29;
-  return 28;break;
-  case 3:return 31;break;
-  case 4:return 30;break;
-  case 5:return 31;break;
-  case 6:return 30;break;
-  case 7:return 31;break;
-  case 8:return 31;break;
-  case 9:return 30;break;
-  case 10:return 31;break;
-  case 11:return 30;break;
-  case 12:return 31;break;
-  default:return 666; // hell's number, can't occur after validating input
+  return 28;
+  
+  case 4:return 30;
+  
+  case 6:return 30;
+  
+  case 9:return 30;
+  
+  case 11:return 30;
+  
+  default:return 31; 
  
  }
 }
@@ -57,15 +59,18 @@ int shift_count(int year,int month , int day){
 
 
 }
-//difference between two dates in one year , second date is starting sooner
+//difference (in days) between two dates in one year , second date is starting sooner
 int diff_between_dates(int year,int month,int day,int sec_month, int sec_day){
 int cur_sum=0;
+//counting days in months between two dates except border months
 for(int i=sec_month+1;i<month;i++){
   cur_sum+=Days_in_month(year,i);
 }
+//adding days from starting month
 if(sec_month!=month){
 cur_sum+=(Days_in_month(year,sec_month)-sec_day);
 }
+//substracting starting days from starting month
 else{
   cur_sum-=sec_day;
 }
@@ -73,7 +78,7 @@ cur_sum+=day;
 
 return cur_sum;
 }
-
+//0 saturday, 1 sunday,2 monday and so on
 int cur_weekday(int y, int m, int d ){
   int shift=shift_count(y,m,d); // if 1.1.2000 was monday then our current year has shift for 1.1.year...
   int days_from_years_beg=diff_between_dates(y,m,d,1,1);
@@ -110,6 +115,7 @@ bool isWorkDay ( int y, int m, int d )
   return false;
 
 }
+//count of working days from current day to Saturday in a week or in reverse manner from current day up to previous Monday
 int Working_days_on_week (int weekday,int year,int month,int day,bool reverse){ //Only for week of one month
   //0 saturday, 1 sunday,2 monday and so on
   int working_days=0;
@@ -120,6 +126,7 @@ int Working_days_on_week (int weekday,int year,int month,int day,bool reverse){ 
     if(cur_weekday(year,month,day)>1){
       working_days++;
     }
+    
     if(weekday==6){
       weekday=0;
       day++;
@@ -165,26 +172,26 @@ int count_of_days_to_end_of_week(int weekday, bool reverse){
   case false:
     switch (weekday)
   {
-  case 2:return 7;break;
-  case 3:return 6;break;
-    case 4:return 5;break;
-    case 5:return 4;break;
-    case 6:return 3;break;
-    case 0:return 2;break;
-    case 1:return 1;break;
+  case 2:return 7;
+  case 3:return 6;
+    case 4:return 5;
+    case 5:return 4;
+    case 6:return 3;
+    case 0:return 2;
+    case 1:return 1;
   
   }
     break;
   default:  
    switch (weekday)
   {
-  case 2:return 1;break;
-  case 3:return 2;break;
-    case 4:return 3;break;
-    case 5:return 4;break;
-    case 6:return 5;break;
-    case 0:return 6;break;
-    case 1:return 7;break;
+  case 2:return 1;
+  case 3:return 2;
+    case 4:return 3;
+    case 5:return 4;
+    case 6:return 5;
+    case 0:return 6;
+    case 1:return 7;
   
   }
   
@@ -193,43 +200,15 @@ int count_of_days_to_end_of_week(int weekday, bool reverse){
   return 7;
   
 }
-
+static int holidays[count_of_holidays][2]={{1,1},{5,1},{5,8},{7,5},{7,6},{9,28},{10,28},{11,17},{12,24},{12,25},{12,26}};
 //good holiday is a holiday on a working day
 int count_of_good_holidays(int year){
     int count=0;
     //0 saturday, 1 sunday ,2 monday and so on
-    if(cur_weekday(year,1,1)>1){
-      count++;
-    }
-    if(cur_weekday(year,5,1)>1){
-      count++;
-    }
-    if(cur_weekday(year,5,8)>1){
-      count++;
-    }
-    if(cur_weekday(year,7,5)>1){
-      count++;
-    }
-    if(cur_weekday(year,7,6)>1){
-      count++;
-    }
-    if(cur_weekday(year,9,28)>1){
-      count++;
-    }
-    if(cur_weekday(year,10,28)>1){
-      count++;
-    }
-    if(cur_weekday(year,11,17)>1){
-      count++;
-    }
-    if(cur_weekday(year,12,24)>1){
-      count++;
-    }
-    if(cur_weekday(year,12,25)>1){
-      count++;
-    }
-    if(cur_weekday(year,12,26)>1){
-      count++;
+    for(int i=0;i<count_of_holidays;i++){
+      if(cur_weekday(year,holidays[i][0],holidays[i][1])>1){
+        count++;
+      }
     }
     
     return count;
@@ -251,21 +230,23 @@ TResult countDaysPerOneYear(int year){
   int count_of_weeks;
   //0 saturday, 1 sunday ,2 monday and so on
   int start_week_day=cur_weekday(year,1,1);
-  if(start_week_day!=2){
+  if(start_week_day!=2){ //if starting day isnt Monday, we have to count working days for this week in a harder way
     tmp_Working_days+=Working_days_on_week(start_week_day,year,1,1,false);
     tmp_total_days_count-=count_of_days_to_end_of_week(start_week_day,false);
   }
   
 
   int end_week_day=cur_weekday(year,12,31);
+  //Same for the last week
   if(end_week_day!=1){
     tmp_Working_days+=Working_days_on_week(end_week_day,year,12,31,true);
     tmp_total_days_count-=count_of_days_to_end_of_week(end_week_day,true);
   }
   
+  //Adding working days without holidays
   count_of_weeks=tmp_total_days_count/7;
   tmp_Working_days+=(count_of_weeks*5);
- 
+ //Substracting holidays
   tmp_Working_days-=count_of_good_holidays(year);
 
   tmp_res[0].m_WorkDays=tmp_Working_days;
@@ -308,10 +289,10 @@ TResult countDays ( int y1, int m1, int d1,
     res[0].m_WorkDays=-1;
     return res[0];
   }
-  
+  //Dates are not in the same year
   if(y2-y1 >0){
-    int year1_a_d=diff_between_dates(y1,12,31,m1,d1)+1;
-    int year1_w_d=workdays_count(y1,m1,d1,12,31);
+    int year1_a_d=diff_between_dates(y1,12,31,m1,d1)+1; //all days between first date and end of the year
+    int year1_w_d=workdays_count(y1,m1,d1,12,31); //Same but working days
     int year_mid_a_d=0; //all days between two years without counting y1 and y2
     int year_mid_w_d=0; //same for workdays;
     TResult tmp;
@@ -327,21 +308,13 @@ TResult countDays ( int y1, int m1, int d1,
     return res[0];
 
   }
-  if(y2==y1){
+  //Dates share same year
+  else{
     res[0].m_TotalDays=diff_between_dates(y1,m2,d2,m1,d1)+1;
     res[0].m_WorkDays=workdays_count(y1,m1,d1,m2,d2);
     return res[0];
   }
-  else{
-     int year1_a_d=diff_between_dates(y1,12,31,m1,d1)+1;
-    int year1_w_d=workdays_count(y1,m1,d1,12,31);
-     int year2_a_d=diff_between_dates(y2,m2,d2,1,1)+1;
-    int year2_w_d=workdays_count(y2,1,1,m2,d2);
-    res[0].m_TotalDays=year1_a_d+year2_a_d;
-    res[0].m_WorkDays=year1_w_d+year2_w_d;
-    return res[0];
-
-  }
+  
 
 
 
