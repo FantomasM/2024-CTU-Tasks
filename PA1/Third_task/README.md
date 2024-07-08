@@ -112,4 +112,5 @@ výpočet i pro velké intervaly (vysoké roky hodně převyšující 4000).</p>
 </ul>
 </td> 
 
-       </tr>
+
+</tr>
