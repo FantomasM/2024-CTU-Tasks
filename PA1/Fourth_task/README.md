@@ -105,7 +105,3 @@ Chybové hlášení zobrazujte na standardní výstup (ne na chybový výstup). 
 </tr>
 
 
-<tr>
-<td class="ltbCell" colspan="2" align="left"><b>Vzorová data:</b></td>
-<td class="rtbCell" align="center"><div class="but1 w120"><div class="but2"><a class="butLink" href="?X=TaskS&amp;Cou=395&amp;Tgr=2530&amp;Tsk=1490">Download</a></div></div></td>
-</tr>
