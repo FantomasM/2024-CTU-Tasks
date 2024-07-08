@@ -40,9 +40,15 @@ typedef struct list_of_days
 void init(list_of_days_t * ptr){
     ptr->allocated_days=2;
     ptr->reviews_day=(Day_t*)malloc(ptr->allocated_days*sizeof(Day_t));
+    if(ptr->reviews_day==NULL){
+        exit(EXIT_FAILURE);
+    }
     //Inicialization of days
     for(int i=0;i<ptr->allocated_days;i++){
         ptr->reviews_day[i].reviews=(review_t*)malloc(2*sizeof(review_t));
+         if(ptr->reviews_day[i].reviews==NULL){
+        exit(EXIT_FAILURE);
+    }
         ptr->reviews_day[i].allocated_space=2;
         ptr->reviews_day[i].reviews_count=0;
     }
@@ -60,13 +66,13 @@ void init(list_of_days_t * ptr){
 ///----------------------------------------------------------------------------------
 // Gregorian calendar version
 bool is_leap(int year){
-  if( (year%4==0 && year%100!=0) || (year%4==0 && year%100==0 && year%400==0)){
+  if( (year%4==0 && year%100!=0) || (year%4==0 && year%100==0 && year%400==0 && year%4000!=0)){
     return true;
   }
   return false;
 }
 ///----------------------------------------------------------------------------------
-int Days_in_month(int year, int month){ //Input is validates and there is no possibility for month to be not in interval <1,12>
+int Days_in_month(int year, int month){ //Input is validated and there is no possibility for month to be not in interval <1,12>
  switch (month)
  {
  
@@ -86,6 +92,9 @@ void init_review(review_t * ptr){ //Inicialization of review
     ptr->allocated_space=2;
     ptr->length_of_text=0;
     ptr->review_text=(char *)malloc(ptr->allocated_space*sizeof(char));
+    if(ptr->review_text==NULL){
+        exit(EXIT_FAILURE);
+    }
 
 
 }
@@ -113,20 +122,32 @@ void dealloc(list_of_days_t * ptr){ //Deallocation of structure
 void review_text_realloc(review_t * ptr){ //Safe realloc function for review's text
     ptr->allocated_space=ptr->allocated_space*2;
     ptr->review_text=(char*)realloc(ptr->review_text,ptr->allocated_space*(sizeof(char)));
+     if(ptr->review_text==NULL){
+        exit(EXIT_FAILURE);
+    }
 }
 ///----------------------------------------------------------------------------------
 void reviews_day_realoc( Day_t * ptr){ //Safe realloc function for reviews
     ptr->allocated_space=ptr->allocated_space*2;
     ptr->reviews=(review_t*)realloc(ptr->reviews,ptr->allocated_space*(sizeof(review_t)));
+     if(ptr->review_text==NULL){
+        exit(EXIT_FAILURE);
+    }
 }
 ///----------------------------------------------------------------------------------
 void Day_t_realoc(list_of_days_t * ptr){ //Safe realloc function for days
     ptr->allocated_days=ptr->allocated_days*2;
     ptr->reviews_day=(Day_t*)realloc(ptr->reviews_day,ptr->allocated_days*(sizeof(Day_t)));
+     if(ptr->reviews_day==NULL){
+        exit(EXIT_FAILURE);
+    }
     //Inicialization of new days
     //Cycle is starting from first added day, which is allocated_days/2 
     for(int i=ptr->allocated_days/2;i<ptr->allocated_days;i++){
         ptr->reviews_day[i].reviews=(review_t*)malloc(2*sizeof(review_t));
+        if(ptr->reviews_day[i].reviews==NULL){
+        exit(EXIT_FAILURE);
+    }
         ptr->reviews_day[i].allocated_space=2;
         ptr->reviews_day[i].reviews_count=0;
     }
@@ -518,11 +539,11 @@ bool Read_Input(list_of_days_t * ptr){
         char sign_to_read;
         int scanf_ret_value=scanf("%c",&sign_to_read);
         
-        if(scanf_ret_value!=1 && scanf_ret_value!=-1 ){
+        if(scanf_ret_value!=1 && scanf_ret_value!=EOF ){
             return false;
         }
         //Handling EOF situation
-        if(scanf_ret_value==-1){
+        if(scanf_ret_value==EOF){
             return true;
         }
         int value;
