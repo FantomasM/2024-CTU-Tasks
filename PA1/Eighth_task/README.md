@@ -26,7 +26,7 @@ m[1, 5] = 30
 m[2, 1] = 40
 </pre>
 
-<center><img src="?X=ImgT&amp;UID=1821&amp;N=1" /></center>
+<center><img src="https://imgur.com/a/taBvfJw" /></center>
 
 <hr />
 
