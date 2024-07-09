@@ -518,7 +518,7 @@ int main ( int argc, char * argv [] )
              && identicalFiles ( "output.utf8", "example/dst_9.utf8" ) );
     assert ( fibonacciToUtf8 ( "example/src_10.fib", "output.utf8" )
              && identicalFiles ( "output.utf8", "example/dst_10.utf8" ) );
-    
+
 
     return EXIT_SUCCESS;
 }
