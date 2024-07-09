@@ -16,7 +16,7 @@ Task: $(OBJS)
 compile: Task
 
 run: compile
-	./$(LOGIN)
+	./a.out
 
 clean:
 	rm -f a.out $(OBJS) *~ core
