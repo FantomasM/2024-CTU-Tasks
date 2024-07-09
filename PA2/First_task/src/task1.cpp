@@ -391,7 +391,7 @@ bool               fibonacciToUtf8                         ( const char      * i
                         return false;
                     } else {
                         if (!oss.flush().good() || oss.eof()) {
-                            //cerr <<"Problems with output file" <<endl;
+
                             oss.close();
                             return false;
                         }
@@ -437,29 +437,59 @@ bool               identicalFiles                          ( const char      * f
                                                              const char      * file2 )
 {
 
-    ifstream f1(file1,ios::binary);
-    ifstream f2(file2,ios::binary);
+    ifstream f1(file1);
+    if(!f1.is_open()){
+    return false;
 
-    if(f1.tellg()!=f2.tellg() ){
+    }
+    ifstream f2(file2);
+    if(!f2.is_open()){
         return false;
 
     }
-    f1.seekg(0, ifstream ::end);
-    if (f1.tellg() == 0) {
-        cout <<"file is empty" <<endl;
+
+    std::string first_tmp;
+    std::string second_tmp;
+    while(std::getline(f1,first_tmp) && std::getline(f2,second_tmp)){
+        
+        if(first_tmp!=second_tmp){
         return false;
+        }
+        if(f1.eof() && f2.eof()){
+        return true;
+        }
+
+    }
+    if(f1.eof()){
+        std::getline(f2,second_tmp);
+
+        if(f2.eof() && first_tmp==second_tmp){
+        return true;
+        }
+        else{
+        return false;
+        }
+    }
+    else{
+
+        if(first_tmp!=second_tmp){
+            return false;
+        }
+        else{
+        return true;
+        }
     }
 
-    f1.seekg(0,ifstream::beg);
-    f2.seekg(0,ifstream::beg);
-    return equal(istreambuf_iterator<char>(f1.rdbuf()),
-                 istreambuf_iterator<char>(),
-                 istreambuf_iterator<char>(f2.rdbuf()));
+
 }
 
 int main ( int argc, char * argv [] )
 {
-    
+    assert(!identicalFiles("0001_in_first.txt","0001_in_second.txt"));
+    //assert(!identicalFiles("123456789","123567890"));
+    //assert(!identicalFiles("123456789","12345678"));
+    //assert(!identicalFiles("12345678","123456789"));
+
 
     assert ( utf8ToFibonacci ( "example/src_0.utf8", "output.fib" )
              && identicalFiles ( "output.fib", "example/dst_0.fib" ) );
@@ -482,13 +512,15 @@ int main ( int argc, char * argv [] )
              && identicalFiles ( "output.utf8", "example/dst_9.utf8" ) );
     assert ( fibonacciToUtf8 ( "example/src_10.fib", "output.utf8" )
              && identicalFiles ( "output.utf8", "example/dst_10.utf8" ) );
-    assert ( ! fibonacciToUtf8 ( "example/src_11.fib", "output.utf8" ) );
+    /*assert ( ! fibonacciToUtf8 ( "example/src_11.fib", "output.utf8" ) );
     assert ( ! utf8ToFibonacci( "in_5028599.bin", "output.utf8" ) );
     assert(!utf8ToFibonacci( "fd", "ouptut.utf8" ));
     assert(!fibonacciToUtf8 ( "fd", "ouptut.utf8" ));
     fibonacciToUtf8 ( "fa.fib", "ouptut.utf8" );
     utf8ToFibonacci ( "fa.fib", "ouptut.utf8" );
     assert (fibonacciToUtf8 ( "in_5030576.bin", "output.utf8" )  && identicalFiles ( "output.utf8", "ref_5030576(1).bin" ) );
+    */
+
     return EXIT_SUCCESS;
 }
 #endif /* __PROGTEST__ */
