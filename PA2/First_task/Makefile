@@ -19,4 +19,4 @@ run: compile
 	./$(LOGIN)
 
 clean:
-	rm -f a.out $(OBJS) *~ core
+	rm -f a.out $(OBJS) *~ core *.utf8 *.fib
