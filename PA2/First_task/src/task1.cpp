@@ -23,9 +23,11 @@ void change_to_fib(int n,vector<bool> &fib_code1){
     int maxfib=30;   //value of fib number 30 is 832040 and max utf8 number has value 1114111, so there is no need to take a bigger fib number
     vector<bool>fib_code;
     int fibonacci[30] = {1, 1};
+    //Calculation of Fibonacci numbers up to 30.
     for (int i = 2; i < 30; i++) {
         fibonacci[i] = fibonacci[i-1] + fibonacci[i-2];
     }
+    //Founding fibonacci number that is smaller or equal to n
     while(fibonacci[maxfib-1]>n){
         maxfib--;
     }
@@ -36,18 +38,19 @@ void change_to_fib(int n,vector<bool> &fib_code1){
 
 
 
-
+                //this fib. number is used to describe n
                 fib_code.insert(fib_code.cbegin(), 1);
                 n -= fibnum;
 
 
-
+            //This fib. number is ignored
         } else{
             fib_code.insert(fib_code.cbegin(),0);
         }
 
     }
     fib_code.push_back(1);
+    //Reversing fib. representation
     for(size_t i=0;i<fib_code.size();i++){
         fib_code1.push_back(fib_code[i]);
     }
@@ -76,6 +79,7 @@ bool               utf8ToFibonacci                         ( const char      * i
                                                              const char      * outFile )
 {
     ifstream file(inFile,std::ios::binary | std::ios::in);
+    //Basic file check
     if(file.is_open()==false || file.fail() || file.peek() == std::ifstream::traits_type::eof() ){
         return false;
     }
@@ -99,6 +103,7 @@ bool               utf8ToFibonacci                         ( const char      * i
 
         buffer.push_back(c);
         unsigned char c1=c;
+        //Case with single byte UTF8 symbol
         if((c1 & 0x80)==0) {
 
              int res=0;
@@ -124,6 +129,7 @@ bool               utf8ToFibonacci                         ( const char      * i
             buffer.clear();
             continue;
         }
+        //Case with a two-byte UTF8 symbol
         if((c1 & 0xe0)==0xc0) {
             if(file.get(c).eof()== true || ((c &0xc0) !=0x80) ){
                 oss.close();
@@ -140,7 +146,7 @@ bool               utf8ToFibonacci                         ( const char      * i
             res++;
             change_to_fib(res,fibcode);
             if(fibcode.size()%8==0 && fibcode.empty()== false){
-                //fibcode=lsb_right(fibcode);
+
                 if(!Print_fibcode(fibcode,oss)){
                     oss.close();
                     return false;
@@ -152,7 +158,7 @@ bool               utf8ToFibonacci                         ( const char      * i
             buffer.clear();
             continue;
         }
-
+        //Case with a three-byte UTF8 symbol
         if((c1 & 0xf0)==0xe0){
             for(int i=0;i<2;i++) {
                 if(file.get(c).eof()== true || ((c &0xc0) !=0x80)){
@@ -183,6 +189,7 @@ bool               utf8ToFibonacci                         ( const char      * i
             buffer.clear();
             continue;
         }
+        //Case with a four-byte UTF-8 symbol
         if((c1 & 0xf8)==0xf0) {
             for(int i=0;i<3;i++) {
                 if(file.get(c).eof()== true || ((c &0xc0) !=0x80)){
@@ -217,6 +224,7 @@ bool               utf8ToFibonacci                         ( const char      * i
         }
 
     }
+
     if(!file.eof() || !oss.flush().good() || oss.fail()){
 
         return false;
@@ -353,7 +361,7 @@ bool               fibonacciToUtf8                         ( const char      * i
                                                              const char      * outFile ) {
     ifstream file(inFile, std::ios::binary | std::ios::in);
 
-
+    //Basic file check
     if (file.is_open() == false || file.peek() == std::ifstream::traits_type::eof()) {
 
         return false;
@@ -485,10 +493,8 @@ bool               identicalFiles                          ( const char      * f
 
 int main ( int argc, char * argv [] )
 {
-    assert(!identicalFiles("0001_in_first.txt","0001_in_second.txt"));
-    //assert(!identicalFiles("123456789","123567890"));
-    //assert(!identicalFiles("123456789","12345678"));
-    //assert(!identicalFiles("12345678","123456789"));
+
+
 
 
     assert ( utf8ToFibonacci ( "example/src_0.utf8", "output.fib" )
@@ -512,14 +518,7 @@ int main ( int argc, char * argv [] )
              && identicalFiles ( "output.utf8", "example/dst_9.utf8" ) );
     assert ( fibonacciToUtf8 ( "example/src_10.fib", "output.utf8" )
              && identicalFiles ( "output.utf8", "example/dst_10.utf8" ) );
-    /*assert ( ! fibonacciToUtf8 ( "example/src_11.fib", "output.utf8" ) );
-    assert ( ! utf8ToFibonacci( "in_5028599.bin", "output.utf8" ) );
-    assert(!utf8ToFibonacci( "fd", "ouptut.utf8" ));
-    assert(!fibonacciToUtf8 ( "fd", "ouptut.utf8" ));
-    fibonacciToUtf8 ( "fa.fib", "ouptut.utf8" );
-    utf8ToFibonacci ( "fa.fib", "ouptut.utf8" );
-    assert (fibonacciToUtf8 ( "in_5030576.bin", "output.utf8" )  && identicalFiles ( "output.utf8", "ref_5030576(1).bin" ) );
-    */
+    
 
     return EXIT_SUCCESS;
 }
