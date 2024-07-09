@@ -15,42 +15,7 @@ using namespace std;
  const int MAX_UTF8_2Byte_symbols = 2047;
  const int MAX_UTF8_3Byte_symbols = 65535;
  const int MAX_UTF8_4Byte_symbols = 1114111;
-/*class Code{
-    vector<char> input_utf;
-    vector<bool>fibcode;
-    const char *inFile;
-    const char * outFile;
-public:
-   bool openFile(){
-       ifstream file(inFile,std::ios::binary | std::ios::in);
-       if(file.is_open()==false || file.fail() || file.peek() == std::ifstream::traits_type::eof() ){
-           return false;
-       }
-   }
-   bool read_sequence(ifstream&file){
-      char sign;
-       if(file.get(sign).eof()){
-          return false;
-       }
-        input_utf.push_back(sign);
 
-   }
-
-   void print_sequence(ofstream & oss){
-
-       for(size_t i=0;i<fibcode.size();i+=8) {
-
-           uint8_t byte = 0;
-           for(size_t b=i+7;b>=i&&b<fibcode.size();b--){
-               byte |=(fibcode[b] << (7-(b-i)));
-
-           }
-           //uint8_t byte2 =byte <<7;
-           oss.write(reinterpret_cast<char*>(&byte),1);
-       }
-   }
-};
-*/
 
 
 
@@ -131,7 +96,7 @@ bool               utf8ToFibonacci                         ( const char      * i
     while(file.get(c)
            ) {
 
-       // cout<<"working" <<endl;
+
         buffer.push_back(c);
         unsigned char c1=c;
         if((c1 & 0x80)==0) {
@@ -139,7 +104,7 @@ bool               utf8ToFibonacci                         ( const char      * i
              int res=0;
             res=buffer[0];
             res++;
-           // cout <<res;
+
             change_to_fib(res,fibcode);
             if(fibcode.size()%8==0 && fibcode.empty()== false){
 
@@ -192,7 +157,7 @@ bool               utf8ToFibonacci                         ( const char      * i
             for(int i=0;i<2;i++) {
                 if(file.get(c).eof()== true || ((c &0xc0) !=0x80)){
                     oss.close();
-                   // cerr << "Nespravny vstup";
+
                     return false;
 
                 };
@@ -205,7 +170,7 @@ bool               utf8ToFibonacci                         ( const char      * i
             res++;
             change_to_fib(res,fibcode);
             if(fibcode.size()%8==0 && fibcode.empty()== false){
-                //fibcode=lsb_right(fibcode);
+
 
                 if(!Print_fibcode(fibcode,oss)){
                     oss.close();
@@ -222,7 +187,7 @@ bool               utf8ToFibonacci                         ( const char      * i
             for(int i=0;i<3;i++) {
                 if(file.get(c).eof()== true || ((c &0xc0) !=0x80)){
 
-                   // cerr << "Nespravny vstup";
+
                     return false;
 
                 };
@@ -234,7 +199,7 @@ bool               utf8ToFibonacci                         ( const char      * i
             res++;
             change_to_fib(res,fibcode);
             if(fibcode.size()%8==0 && fibcode.empty()== false){
-                //fibcode=lsb_right(fibcode);
+
                 if(!Print_fibcode(fibcode,oss)){
                     oss.close();
                     return false;
@@ -263,7 +228,7 @@ bool               utf8ToFibonacci                         ( const char      * i
         }
 
 
-       // fibcode=lsb_right(fibcode);
+
         if(!Print_fibcode(fibcode,oss)){
             oss.close();
             return false;
@@ -299,7 +264,7 @@ vector<bool> change_to_binary(int n,vector<bool> fibcode1){
             fibcode.push_back(0);
         }
     }
-    //vector<bool>fibcode_right= lsb_right(fibcode);
+
 
 
 
@@ -324,12 +289,12 @@ bool print_to_file(size_t &is,vector<bool>& fibcode,ofstream& oss){
 
 
     result--;
-    //cout <<result <<endl;
+
     if(result <=MAX_UTF8_1Byte_symbols){
-        //oss<<char(result);
+
         uint8_t res1=result;
         oss.write(reinterpret_cast<char *>(&res1), 1);
-        //cout<<char(result)<<endl;
+
 
         fibcode.erase(fibcode.cbegin(),fibcode.cbegin()+is+2);
 
@@ -338,10 +303,10 @@ bool print_to_file(size_t &is,vector<bool>& fibcode,ofstream& oss){
     else if(result <= MAX_UTF8_2Byte_symbols){
     uint8_t res1=(((result)>>6) | 0xC0);
     oss.write(reinterpret_cast<char *>(&res1), 1);
-    //oss.write(char((((result)>>6) | 0xC0)),1);
+
     uint8_t res2=((result & 0x3f) | 0x80);
         oss.write(reinterpret_cast<char *>(&res2), 1);
-    //oss<<char(((result & 0x3f) | 0x80));
+
 
         fibcode.erase(fibcode.cbegin(),fibcode.cbegin()+is+2);
 
@@ -355,10 +320,9 @@ bool print_to_file(size_t &is,vector<bool>& fibcode,ofstream& oss){
         oss.write(reinterpret_cast<char *>(&res1), 1);
         oss.write(reinterpret_cast<char *>(&res2), 1);
         oss.write(reinterpret_cast<char *>(&res3), 1);
-        //oss<<char((result>>12) |0xe0);
-   // oss<<char(((result>>6) & 0x3f) |0x80);
 
-   // oss<<char((result & 0x3f) | 0x80);
+
+
 
         fibcode.erase(fibcode.cbegin(),fibcode.cbegin()+is+2);
 
@@ -373,19 +337,15 @@ bool print_to_file(size_t &is,vector<bool>& fibcode,ofstream& oss){
         oss.write(reinterpret_cast<char *>(&res2), 1);
         oss.write(reinterpret_cast<char *>(&res3), 1);
         oss.write(reinterpret_cast<char *>(&res4), 1);
-       // oss<<char((result>>18) |0xf0);
 
-       // oss<<char(((result >>12) &0x3f)|0x80);
 
-       // oss<<char(((result>>6) &0x3f) |0x80);
 
-       // oss<<char((result & 0x3f) | 0x80);
 
         fibcode.erase(fibcode.cbegin(),fibcode.cbegin()+is+2);
 
         return true;
     }
-    cout << "brrrrr"<<endl;
+
     return false;
 
 }
@@ -395,10 +355,10 @@ bool               fibonacciToUtf8                         ( const char      * i
 
 
     if (file.is_open() == false || file.peek() == std::ifstream::traits_type::eof()) {
-        //cerr <<"File is not open" <<endl;
+
         return false;
     }
-    //cout <<"start 2" <<endl;
+
 
     vector<bool> fibcode;
     vector<bool> right_fibcode;
@@ -407,7 +367,7 @@ bool               fibonacciToUtf8                         ( const char      * i
 
     oss.clear();
     if (!oss || !oss.is_open()) {
-        // cerr <<"Problems with output file" <<endl;
+
         oss.close();
         return false;
     }
@@ -416,13 +376,13 @@ bool               fibonacciToUtf8                         ( const char      * i
 
         int y = data_FIB[0];
 
-        //cout << c <<endl;
+
         fibcode=change_to_binary(y, fibcode);
         for (size_t i = 0; i < fibcode.size(); i++) {
 
             if (i != fibcode.size() - 1 && fibcode[i] == true && fibcode[i + 1] == true) {
                 if (i > 30) {
-                    // cerr <<"Fibonacci sequence is too long" <<endl;
+
                     return false; //Because fibonacci number starting from F(31) are higher than every UTF 8 sign value
                 } else {
 
@@ -454,15 +414,15 @@ bool               fibonacciToUtf8                         ( const char      * i
 
     for(size_t i=0;i<fibcode.size();i++){
         if(fibcode[i]== true){
-           //cerr <<"Wrong sequence" <<endl;
+
             oss.close();
             return false;
         }
     }
-    //cout <<endl;
 
 
-    //file.close();
+
+
     oss.close();
     return true;
 
@@ -476,7 +436,7 @@ bool               fibonacciToUtf8                         ( const char      * i
 bool               identicalFiles                          ( const char      * file1,
                                                              const char      * file2 )
 {
-    //return true;
+
     ifstream f1(file1,ios::binary);
     ifstream f2(file2,ios::binary);
 
@@ -499,7 +459,7 @@ bool               identicalFiles                          ( const char      * f
 
 int main ( int argc, char * argv [] )
 {
-    //cout<<"start" << endl;
+    
 
     assert ( utf8ToFibonacci ( "example/src_0.utf8", "output.fib" )
              && identicalFiles ( "output.fib", "example/dst_0.fib" ) );
