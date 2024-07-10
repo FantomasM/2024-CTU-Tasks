@@ -1,0 +1,36 @@
+{
+    "skills": [
+        {
+            "name": "Power",
+            "level": 3,
+            "cost_next_level": 1,
+            "max_level": 10
+        },
+        {
+            "name": "Intelligence",
+            "level": 4,
+            "cost_next_level": 1,
+            "max_level": 10
+        },
+        {
+            "name": "Luck",
+            "level": 5,
+            "cost_next_level": 2,
+            "max_level": 10
+        },
+        {
+            "name": "Strength",
+            "level": 2,
+            "cost_next_level": 1,
+            "max_level": 10
+        },
+        {
+            "name": "Personality",
+            "level": 1,
+            "cost_next_level": 1,
+            "max_level": 10
+        }
+    ],
+    "points_to_distribute": 5
+}
+

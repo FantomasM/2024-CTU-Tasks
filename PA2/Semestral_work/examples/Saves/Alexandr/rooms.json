@@ -1,0 +1,651 @@
+{
+    "Start_room": "Kitchen",
+    "rooms": [
+        {
+            "Room_characters": [
+                {
+                    "Monster": [
+                        {
+                            "HP": 65,
+                            "HPmax": 100,
+                            "damage": 5,
+                            "damageMax": 10,
+                            "defence": 15,
+                            "inventory": [
+                                {
+                                    "Capacity": 1,
+                                    "Class name": "Character_arm",
+                                    "Items": [
+                                        {
+                                            "Class_name": "Weapon",
+                                            "Item_name": "Grigoriy",
+                                            "buy_value": 1000,
+                                            "damage": 55,
+                                            "sell_value": 333
+                                        }
+                                    ],
+                                    "Number of Items": 1
+                                },
+                                {
+                                    "Capacity": 1,
+                                    "Class name": "Character_arm",
+                                    "Items": [
+                                        {
+                                            "Class_name": "Weapon",
+                                            "Item_name": "Grigoriy",
+                                            "buy_value": 1000,
+                                            "damage": 55,
+                                            "sell_value": 333
+                                        }
+                                    ],
+                                    "Number of Items": 1
+                                },
+                                {
+                                    "Capacity": 6,
+                                    "Class name": "Armour_cont",
+                                    "Items": null,
+                                    "Number of Items": 0
+                                },
+                                {
+                                    "Capacity": 10,
+                                    "Class name": "Backpack",
+                                    "Items": [
+                                        {
+                                            "Class_name": "Armour",
+                                            "Item_name": "Diamond helmet",
+                                            "Part": 1,
+                                            "buy_value": 1000,
+                                            "defence": 30,
+                                            "sell_value": 350
+                                        },
+                                        {
+                                            "Class_name": "Item_saver",
+                                            "Inside items": [
+                                                {
+                                                    "Class_name": "Weapon",
+                                                    "Item_name": "Grigoriy",
+                                                    "buy_value": 1000,
+                                                    "damage": 55,
+                                                    "sell_value": 333
+                                                }
+                                            ],
+                                            "Item_name": "sword_pack",
+                                            "buy_value": 2000,
+                                            "capacity": 1,
+                                            "sell_value": 833
+                                        },
+                                        {
+                                            "Class_name": "Valuables",
+                                            "Item_name": "diamond",
+                                            "buy_value": 1000,
+                                            "sell_value": 500
+                                        }
+                                    ],
+                                    "Number of Items": 3
+                                }
+                            ],
+                            "level": 10,
+                            "name": "Stepan"
+                        },
+                        {
+                            "HP": 37,
+                            "HPmax": 100,
+                            "damage": 7,
+                            "damageMax": 14,
+                            "defence": 15,
+                            "inventory": [
+                                {
+                                    "Capacity": 1,
+                                    "Class name": "Character_arm",
+                                    "Items": [
+                                        {
+                                            "Class_name": "Weapon",
+                                            "Item_name": "Grigoriy",
+                                            "buy_value": 1000,
+                                            "damage": 55,
+                                            "sell_value": 333
+                                        }
+                                    ],
+                                    "Number of Items": 1
+                                },
+                                {
+                                    "Capacity": 1,
+                                    "Class name": "Character_arm",
+                                    "Items": [
+                                        {
+                                            "Class_name": "Weapon",
+                                            "Item_name": "Grigoriy",
+                                            "buy_value": 1000,
+                                            "damage": 55,
+                                            "sell_value": 333
+                                        }
+                                    ],
+                                    "Number of Items": 1
+                                },
+                                {
+                                    "Capacity": 6,
+                                    "Class name": "Armour_cont",
+                                    "Items": null,
+                                    "Number of Items": 0
+                                },
+                                {
+                                    "Capacity": 10,
+                                    "Class name": "Backpack",
+                                    "Items": [
+                                        {
+                                            "Class_name": "Armour",
+                                            "Item_name": "Diamond helmet",
+                                            "Part": 1,
+                                            "buy_value": 1000,
+                                            "defence": 30,
+                                            "sell_value": 350
+                                        },
+                                        {
+                                            "Class_name": "Item_saver",
+                                            "Inside items": [
+                                                {
+                                                    "Class_name": "Weapon",
+                                                    "Item_name": "Grigoriy",
+                                                    "buy_value": 1000,
+                                                    "damage": 55,
+                                                    "sell_value": 333
+                                                }
+                                            ],
+                                            "Item_name": "sword_pack",
+                                            "buy_value": 2000,
+                                            "capacity": 1,
+                                            "sell_value": 833
+                                        },
+                                        {
+                                            "Class_name": "Valuables",
+                                            "Item_name": "diamond",
+                                            "buy_value": 1000,
+                                            "sell_value": 500
+                                        }
+                                    ],
+                                    "Number of Items": 3
+                                }
+                            ],
+                            "level": 10,
+                            "name": "Strelok"
+                        }
+                    ]
+                },
+                {
+                    "Normal_NPC": null
+                }
+            ],
+            "Room_description": "A comfortable bedroom with a king-sized bed.",
+            "Room_exits": [
+                "Living room"
+            ],
+            "Room_name": "Bedroom",
+            "Room_objects": [
+                {
+                    "Object_describe": "Yes, its a real BFV",
+                    "Object_detailed_describe": "Seems like you can put in your backpack, no way you would have better deal",
+                    "Object_name": "BradleyM2A2",
+                    "after_destruction": false,
+                    "destructible": false,
+                    "items": [
+                        {
+                            "Class_name": "Weapon",
+                            "Item_name": "Bradley",
+                            "buy_value": 567,
+                            "damage": 1000,
+                            "sell_value": 222
+                        }
+                    ]
+                },
+                {
+                    "Object_describe": "Popis objektu 2",
+                    "Object_detailed_describe": "Podrobný popis objektu 2",
+                    "Object_name": "Název objektu 2",
+                    "after_destruction": true,
+                    "destructible": true,
+                    "items": null
+                },
+                {
+                    "Object_describe": "Popis objektu 3",
+                    "Object_detailed_describe": "Podrobný popis objektu 3",
+                    "Object_name": "Název objektu 3",
+                    "after_destruction": false,
+                    "destructible": true,
+                    "items": null
+                }
+            ]
+        },
+        {
+            "Room_characters": [
+                {
+                    "Monster": null
+                },
+                {
+                    "Normal_NPC": [
+                        {
+                            "Description": "Tall man with blond hair and green beard , he is wearing an elf's costume...",
+                            "HP": 65,
+                            "HPmax": 100,
+                            "damage": 5,
+                            "defence": 15,
+                            "dialogues": [
+                                {
+                                    "Dialogues_responses": null,
+                                    "Dialogues_text": "Oh, god, he is entering the zone right know, i guess you should hurry up to the Monolit's checkpoint"
+                                },
+                                {
+                                    "Dialogues_responses": [
+                                        {
+                                            "next_dialogue": "None",
+                                            "response": "Nobody, forget what i said *You ran out from this guy*"
+                                        },
+                                        {
+                                            "next_dialogue": "Oh, god, he is entering the zone right know, i guess you should hurry up to the Monolit's checkpoint",
+                                            "response": "I'm looking for Strelok, do you know him?"
+                                        }
+                                    ],
+                                    "Dialogues_text": "What person are you looking for?"
+                                },
+                                {
+                                    "Dialogues_responses": null,
+                                    "Dialogues_text": "Well, i guess i can give you some work [Look on his tasks in previous menu]"
+                                },
+                                {
+                                    "Dialogues_responses": [
+                                        {
+                                            "next_dialogue": "Well, i guess i can give you some work [Look on his tasks in previous menu]",
+                                            "response": "Can you help me with finding job in this town?"
+                                        },
+                                        {
+                                            "next_dialogue": "What person are you looking for?",
+                                            "response": "I was looking for one person"
+                                        }
+                                    ],
+                                    "Dialogues_text": "Hi, you are new at the town, what can i do for you?"
+                                }
+                            ],
+                            "inventory": [
+                                {
+                                    "Capacity": 1,
+                                    "Class name": "Character_arm",
+                                    "Items": [
+                                        {
+                                            "Class_name": "Weapon",
+                                            "Item_name": "Grigoriy",
+                                            "buy_value": 1000,
+                                            "damage": 55,
+                                            "sell_value": 333
+                                        }
+                                    ],
+                                    "Number of Items": 1
+                                },
+                                {
+                                    "Capacity": 1,
+                                    "Class name": "Character_arm",
+                                    "Items": [
+                                        {
+                                            "Class_name": "Weapon",
+                                            "Item_name": "Grigoriy",
+                                            "buy_value": 1000,
+                                            "damage": 55,
+                                            "sell_value": 333
+                                        }
+                                    ],
+                                    "Number of Items": 1
+                                },
+                                {
+                                    "Capacity": 6,
+                                    "Class name": "Armour_cont",
+                                    "Items": null,
+                                    "Number of Items": 0
+                                },
+                                {
+                                    "Capacity": 10,
+                                    "Class name": "Backpack",
+                                    "Items": [
+                                        {
+                                            "Class_name": "Item_saver",
+                                            "Inside items": [
+                                                {
+                                                    "Class_name": "Weapon",
+                                                    "Item_name": "Grigoriy",
+                                                    "buy_value": 1000,
+                                                    "damage": 55,
+                                                    "sell_value": 333
+                                                }
+                                            ],
+                                            "Item_name": "sword_pack",
+                                            "buy_value": 2000,
+                                            "capacity": 1,
+                                            "sell_value": 833
+                                        },
+                                        {
+                                            "Class_name": "Valuables",
+                                            "Item_name": "diamond",
+                                            "buy_value": 1000,
+                                            "sell_value": 500
+                                        }
+                                    ],
+                                    "Number of Items": 2
+                                }
+                            ],
+                            "level": 10,
+                            "name": "Stepan",
+                            "tasks": [
+                                {
+                                    "Finished": false,
+                                    "Items": null,
+                                    "Monster": [
+                                        {
+                                            "HP": 65,
+                                            "HPmax": 100,
+                                            "damage": 5,
+                                            "damageMax": 10,
+                                            "defence": 15,
+                                            "inventory": [
+                                                {
+                                                    "Capacity": 1,
+                                                    "Class name": "Character_arm",
+                                                    "Items": [
+                                                        {
+                                                            "Class_name": "Weapon",
+                                                            "Item_name": "Grigoriy",
+                                                            "buy_value": 1000,
+                                                            "damage": 55,
+                                                            "sell_value": 333
+                                                        }
+                                                    ],
+                                                    "Number of Items": 1
+                                                },
+                                                {
+                                                    "Capacity": 1,
+                                                    "Class name": "Character_arm",
+                                                    "Items": [
+                                                        {
+                                                            "Class_name": "Weapon",
+                                                            "Item_name": "Grigoriy",
+                                                            "buy_value": 1000,
+                                                            "damage": 55,
+                                                            "sell_value": 333
+                                                        }
+                                                    ],
+                                                    "Number of Items": 1
+                                                },
+                                                {
+                                                    "Capacity": 6,
+                                                    "Class name": "Armour_cont",
+                                                    "Items": null,
+                                                    "Number of Items": 0
+                                                },
+                                                {
+                                                    "Capacity": 10,
+                                                    "Class name": "Backpack",
+                                                    "Items": [
+                                                        {
+                                                            "Class_name": "Armour",
+                                                            "Item_name": "Diamond helmet",
+                                                            "Part": 1,
+                                                            "buy_value": 1000,
+                                                            "defence": 30,
+                                                            "sell_value": 350
+                                                        },
+                                                        {
+                                                            "Class_name": "Item_saver",
+                                                            "Inside items": [
+                                                                {
+                                                                    "Class_name": "Weapon",
+                                                                    "Item_name": "Grigoriy",
+                                                                    "buy_value": 1000,
+                                                                    "damage": 55,
+                                                                    "sell_value": 333
+                                                                }
+                                                            ],
+                                                            "Item_name": "sword_pack",
+                                                            "buy_value": 2000,
+                                                            "capacity": 1,
+                                                            "sell_value": 833
+                                                        },
+                                                        {
+                                                            "Class_name": "Valuables",
+                                                            "Item_name": "diamond",
+                                                            "buy_value": 1000,
+                                                            "sell_value": 500
+                                                        }
+                                                    ],
+                                                    "Number of Items": 3
+                                                }
+                                            ],
+                                            "level": 10,
+                                            "name": "Strelok"
+                                        }
+                                    ],
+                                    "NPC": null,
+                                    "Task_description": "You must kill Strelok",
+                                    "Task_name": "Hunting on Strelok",
+                                    "award": 200,
+                                    "perks": [
+                                        {
+                                            "cost_next_level": 1,
+                                            "level": 1,
+                                            "max_level": 10,
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "type": 2
+                                },
+                                {
+                                    "Finished": false,
+                                    "Items": null,
+                                    "Monster": [
+                                        {
+                                            "HP": 65,
+                                            "HPmax": 100,
+                                            "damage": 5,
+                                            "damageMax": 10,
+                                            "defence": 15,
+                                            "inventory": [
+                                                {
+                                                    "Capacity": 1,
+                                                    "Class name": "Character_arm",
+                                                    "Items": [
+                                                        {
+                                                            "Class_name": "Weapon",
+                                                            "Item_name": "Grigoriy",
+                                                            "buy_value": 1000,
+                                                            "damage": 55,
+                                                            "sell_value": 333
+                                                        }
+                                                    ],
+                                                    "Number of Items": 1
+                                                },
+                                                {
+                                                    "Capacity": 1,
+                                                    "Class name": "Character_arm",
+                                                    "Items": [
+                                                        {
+                                                            "Class_name": "Weapon",
+                                                            "Item_name": "Grigoriy",
+                                                            "buy_value": 1000,
+                                                            "damage": 55,
+                                                            "sell_value": 333
+                                                        }
+                                                    ],
+                                                    "Number of Items": 1
+                                                },
+                                                {
+                                                    "Capacity": 6,
+                                                    "Class name": "Armour_cont",
+                                                    "Items": null,
+                                                    "Number of Items": 0
+                                                },
+                                                {
+                                                    "Capacity": 10,
+                                                    "Class name": "Backpack",
+                                                    "Items": [
+                                                        {
+                                                            "Class_name": "Armour",
+                                                            "Item_name": "Diamond helmet",
+                                                            "Part": 1,
+                                                            "buy_value": 1000,
+                                                            "defence": 30,
+                                                            "sell_value": 350
+                                                        },
+                                                        {
+                                                            "Class_name": "Item_saver",
+                                                            "Inside items": [
+                                                                {
+                                                                    "Class_name": "Weapon",
+                                                                    "Item_name": "Grigoriy",
+                                                                    "buy_value": 1000,
+                                                                    "damage": 55,
+                                                                    "sell_value": 333
+                                                                }
+                                                            ],
+                                                            "Item_name": "sword_pack",
+                                                            "buy_value": 2000,
+                                                            "capacity": 1,
+                                                            "sell_value": 833
+                                                        },
+                                                        {
+                                                            "Class_name": "Valuables",
+                                                            "Item_name": "diamond",
+                                                            "buy_value": 1000,
+                                                            "sell_value": 500
+                                                        }
+                                                    ],
+                                                    "Number of Items": 3
+                                                }
+                                            ],
+                                            "level": 10,
+                                            "name": "Stepan"
+                                        }
+                                    ],
+                                    "NPC": null,
+                                    "Task_description": "Stepan has a nephew with same name, you know what to do",
+                                    "Task_name": "Kill another Stepan",
+                                    "award": 100,
+                                    "perks": [
+                                        {
+                                            "cost_next_level": 2,
+                                            "level": 30,
+                                            "max_level": 10,
+                                            "name": "Luck"
+                                        }
+                                    ],
+                                    "type": 2
+                                },
+                                {
+                                    "Finished": false,
+                                    "Items": null,
+                                    "Monster": null,
+                                    "NPC": null,
+                                    "Task_description": "Just find this man, you know who am talking about",
+                                    "Task_name": "Random task",
+                                    "award": 50,
+                                    "perks": [
+                                        {
+                                            "cost_next_level": 1,
+                                            "level": 4,
+                                            "max_level": 10,
+                                            "name": "Intelligence"
+                                        }
+                                    ],
+                                    "type": 0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "Room_description": "A modern kitchen with stainless steel appliances.",
+            "Room_exits": [
+                "Living room"
+            ],
+            "Room_name": "Kitchen",
+            "Room_objects": [
+                {
+                    "Object_describe": "Some stinky bag is laying on the corner of the street",
+                    "Object_detailed_describe": "Smell is awfull, but seems that something is inside",
+                    "Object_name": "Garbage bag",
+                    "after_destruction": false,
+                    "destructible": false,
+                    "items": [
+                        {
+                            "Class_name": "Food",
+                            "Item_name": "bread with taste of rat",
+                            "buy_value": 567,
+                            "heal_effect": -5,
+                            "sell_value": 222
+                        }
+                    ]
+                },
+                {
+                    "Object_describe": "Best car of 80's is now standing without any tire",
+                    "Object_detailed_describe": "Time machine is wasted",
+                    "Object_name": "Delorian",
+                    "after_destruction": true,
+                    "destructible": true,
+                    "items": null
+                },
+                {
+                    "Object_describe": "A 2 meter high cheese",
+                    "Object_detailed_describe": "Looks like gouda",
+                    "Object_name": "Big Cheese",
+                    "after_destruction": false,
+                    "destructible": true,
+                    "items": null
+                }
+            ]
+        },
+        {
+            "Room_characters": [
+                {
+                    "Monster": null
+                },
+                {
+                    "Normal_NPC": null
+                }
+            ],
+            "Room_description": "A cozy living room with a fireplace.",
+            "Room_exits": [
+                "Kitchen",
+                "Bedroom"
+            ],
+            "Room_name": "Living room",
+            "Room_objects": [
+                {
+                    "Object_describe": "some strange bag is laying on the floor",
+                    "Object_detailed_describe": "Seems like this bag has something in it",
+                    "Object_name": "Dropped bag",
+                    "after_destruction": false,
+                    "destructible": false,
+                    "items": [
+                        {
+                            "Class_name": "Food",
+                            "Item_name": "Fried Cheese",
+                            "buy_value": 567,
+                            "heal_effect": 23,
+                            "sell_value": 222
+                        }
+                    ]
+                },
+                {
+                    "Object_describe": "Stone face of catdog is starring on you from the bar's wall",
+                    "Object_detailed_describe": "Seems like it's almost destroyed",
+                    "Object_name": "Stoneface",
+                    "after_destruction": true,
+                    "destructible": true,
+                    "items": null
+                },
+                {
+                    "Object_describe": "Seems like statue of famous actor",
+                    "Object_detailed_describe": "Oh, this statue was stolen from Odesa, no need to introduce this guy",
+                    "Object_name": "Billy Herrington's statue",
+                    "after_destruction": false,
+                    "destructible": true,
+                    "items": null
+                }
+            ]
+        }
+    ]
+}

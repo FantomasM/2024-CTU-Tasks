@@ -1,0 +1,80 @@
+Hra: Textové RPG(Gamebook) 
+
+ 
+
+Specifikace 
+
+ 
+
+Budeme implementovat game engine pro textové RPG. 
+
+ Game Engine umožní vytvořit herní postavu , která z předem načtených souborů bude volit atributy jako sila , rozum atd, a tyto atributy budou předem definovány v souboru a dá se dodefinovat jakékoli s tím, že u nich se da definovat počáteční úroveň , počet  Exp potřebný k přechodu na další úroveň a taky maximální úroveň. 
+ Urcité atributy budou potřeba k určitým ukolům.
+ 
+ Pro uzivatele je možné definovat v konfiguračním souboru věci , které budé mit. Taky je možné definovat hlavní úkoly ve hře, úkoly ,které uživatel bude mít na začatku, jsou počitany za hlavní.
+ V podstatě pouze jmeno uzivatel definuje sám, další atributz jsou konfigurovatelné ze souborů.
+
+Taky bude možnost vybrat povolaní , ty taky budou definovány v konfiguračních souborech . Každé povolaní bude mít schopnosti, které jsou buď aktivní nebo pasivní , schopnosti můžou být 6 druhů: 
+
+Aktivní: 
+
+1)Paralysing  
+
+Umožní hráči paralyzovat na jeden krok určitý počet protivníků, počet je definovat v konfiguračním souboru. 
+
+2)Healing 
+
+Umožní hráči obnovit HP. V konfiguračním souboru bude definován počet HP k obnovení. Při tom, že HP nemuže přesahnout MaxHP.
+
+3) Massive attack 
+
+Umožní hráči způsobit škodu všem protivníkům na hřišti během jednoho kroku. V konfiguračním souboru bude definován damage. 
+
+Pasivní: 
+
+1)StatMod 
+
+Rovnou při volbě povolání zvýší pro hráče určitý atribut na určitou velikost, atribut a velikost jsou předem definovány v konfiguračním souboru. 
+
+2)Regeneration  
+
+Na konci kroku obnoví urcitý počet HP hrači. Počet HP je stanovený v konfiguracním souboru
+
+3) berserk 
+
+Pokud hráči bude snížen počet HP k určité hranici , jeho damage bude zvýšen o určité procento definované v konfiguračním souboru spolu s hranicí. 
+
+ 
+
+V enginu bude implementován inventář , který dovolí uživatelovi využívat ruky, batoh a případně některé předměty , do kterých se dá naložit další věci. Samostatné věci můžou být 6 druhů, a to: 
+
+Weapon, Armour, Food, Valuables a Item_saver 
+
+Weapon je predmět, který uživatel muže mít v ruce anebo v batohu , v ruce uživatel může mít pouze Weapon a přibližně to samý platí pro Armour, jenomže místo ruk Armour může mít na sobě, což zvyší defence parameter uživatele , stejně jako damage když uživatel dá zbrań do ruky
+
+Taky v enginu bude implementován soubojový systém, který umožní jak standartní útoky , tak i využití schopností .
+
+Z hlediska uživatele budou tři možnosti, a to utočit přimo na konkretního monstra, využit aktivné schopnosti anebo využit jídlo k obnovení HP 
+
+Engine umožní uložit a načíst už rozehranou hru s tím že uložení nemůže proběhnou uprostřed bitvy, ale pouze mezi bitvami.  
+
+Základní interakce ve hře probíhají s protivníky a s mírnými NPC, při přechodu na novou lokaci na hráče napadnou protivníky, pokud v této lokaci jsou, jinak pro hráče se vypíše popis místnosti a způsoby interakce s okolím , a to bud s předměty nebo s NPC , anebo s přechody do jiné místnosti . 
+
+S mirnými NPC se dá mluvít v předem stanovených ramcích, dá se s nimi obchodovat, a to jak prodavat, tak i nakupovat, z hlediska NPC nebude stanovena limita peněz, taky u NPC lze vzít úkoly tří druhů, a to: najít nějaký předmět, najit nějakou osobu anebo zabít monstra
+
+Místnosti jsou také definované v konfiguračních souborech a do nich jsou uloženy předměty, postavy a taky přechody do jiných místností. 
+
+V každé místnosti můžou být objekty, na ty se dá kouknout zblizka a dostat podrobnější popis, v některých objektech můžou být předměty a nekteré objektý je možné zničit a připadně taky dostat nějaké věci z nich.
+
+Celé uložení a načítaní hry probíhá s využitím json souborů. 
+
+Polymorfismus:
+
+Polymorfismus je aplikovan ve čtyřech místech, a to v třidách Item , Character, Items_container, Effects
+
+Item slouží pro fungování Inventaře, k polymorfnímu volání dochazí napřiklad při ukladání dat do json formatu v Items_container , pak napřiklad při přesunutí věcí a při interakcí s inventařem
+
+Třidá hp.h slouží jako zakladní třida pro funkčnost zdraví, z ní dědí Character, což je poloabstraktní třída, i když nemá abstraktní metody, nepouživá se přimo , z ni dědí User, Monster a Normal_NPC.
+Při bitvě dochazí k polymorfnímu volání funkcí interaction u Monstra a uzivatele, a po bitvě už tato metoda se muže zavolat u Normal_NPC pro interakcí s uživatelem
+
+Effects slouží pro fungování hlavně v bitvě, v bitvě dochazí k její polymorfnímu volání u uživatele 

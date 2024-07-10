@@ -1,0 +1,82 @@
+{
+    "archetypes": [
+        {
+            "class_name": "Warrior",
+            "effects": [
+                {
+                    "class_name": "Massive_attack",
+                    "name_of_effect": "Strong Attack",
+                    "damage": 10
+                },
+                {
+                    "class_name": "StatMod",
+                    "name_of_effect": "Strong Body",
+                    "stat": "Strength",
+                    "increase_Mod": 2
+                },
+                {
+                    "class_name": "Regeneration",
+                    "name_of_effect": "Regeneration",
+                    "heal_effect": 2
+                },
+                {
+                    "class_name": "berserk",
+                    "name_of_effect": "Adrenaline Rush",
+                    "increase_Mod": 2,
+                    "measure": 0.4
+                },
+                {
+                    "class_name": "Healing",
+                    "name_of_effect": "Healing",
+                    "heal_effect": 17
+                }
+            ]
+        },
+        {
+            "class_name": "Healer",
+            "effects": [
+                {
+                    "class_name": "Massive_attack",
+                    "name_of_effect": "Magic Missile",
+                    "damage": 5
+                },
+                {
+                    "class_name": "StatMod",
+                    "name_of_effect": "Magical Mind",
+                    "stat": "Intelligence",
+                    "increase_Mod": 1.1
+                },
+                {
+                    "class_name": "Regeneration",
+                    "name_of_effect": "Regeneration",
+                    "heal_effect": 2
+                }
+            ]
+        },
+        {
+            "class_name": "Thief",
+            "effects": [
+                {
+                    "class_name": "Massive_attack",
+                    "name_of_effect": "Backstab",
+                    "damage": 7
+                },
+                {
+                    "class_name": "StatMod",
+                    "name_of_effect": "Nimble Fingers",
+                    "stat": "Agility",
+                    "increase_Mod": 1.1
+                },
+                {
+                    "class_name": "berserk",
+                    "name_of_effect": "Adrenaline Rush",
+                    "increase_Mod": 2,
+                    "measure": 0.5
+                }
+            ]
+        }
+    ]
+}
+
+
+

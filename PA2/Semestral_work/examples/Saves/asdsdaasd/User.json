@@ -1,0 +1,166 @@
+{
+    "Archetype": "Thief",
+    "HP": 100,
+    "HPmax": 100,
+    "damage": 30,
+    "defence": 10,
+    "exp": 392,
+    "exp_next": 814,
+    "inventory": [
+        {
+            "Capacity": 1,
+            "Class name": "Character_arm",
+            "Items": null,
+            "Number of Items": 0
+        },
+        {
+            "Capacity": 1,
+            "Class name": "Character_arm",
+            "Items": null,
+            "Number of Items": 0
+        },
+        {
+            "Capacity": 6,
+            "Class name": "Armour_cont",
+            "Items": null,
+            "Number of Items": 0
+        },
+        {
+            "Capacity": 10,
+            "Class name": "Backpack",
+            "Items": null,
+            "Number of Items": 0
+        }
+    ],
+    "level": 4,
+    "money": 1100,
+    "name": "asdsdaasd",
+    "perks": [
+        {
+            "cost_next_level": 1,
+            "level": 4,
+            "max_level": 10,
+            "name": "Power"
+        },
+        {
+            "cost_next_level": 1,
+            "level": 4,
+            "max_level": 10,
+            "name": "Intelligence"
+        },
+        {
+            "cost_next_level": 2,
+            "level": 5,
+            "max_level": 10,
+            "name": "Luck"
+        },
+        {
+            "cost_next_level": 1,
+            "level": 3,
+            "max_level": 10,
+            "name": "Strength"
+        },
+        {
+            "cost_next_level": 1,
+            "level": 1,
+            "max_level": 10,
+            "name": "Personality"
+        }
+    ],
+    "tasks": [
+        {
+            "Finished": false,
+            "Items": null,
+            "Monster": [
+                {
+                    "HP": 65,
+                    "HPmax": 100,
+                    "damage": 5,
+                    "damageMax": 10,
+                    "defence": 15,
+                    "inventory": [
+                        {
+                            "Capacity": 1,
+                            "Class name": "Character_arm",
+                            "Items": [
+                                {
+                                    "Class_name": "Weapon",
+                                    "Item_name": "Grigoriy",
+                                    "buy_value": 1000,
+                                    "damage": 55,
+                                    "sell_value": 333
+                                }
+                            ],
+                            "Number of Items": 1
+                        },
+                        {
+                            "Capacity": 1,
+                            "Class name": "Character_arm",
+                            "Items": [
+                                {
+                                    "Class_name": "Weapon",
+                                    "Item_name": "Grigoriy",
+                                    "buy_value": 1000,
+                                    "damage": 55,
+                                    "sell_value": 333
+                                }
+                            ],
+                            "Number of Items": 1
+                        },
+                        {
+                            "Capacity": 6,
+                            "Class name": "Armour_cont",
+                            "Items": null,
+                            "Number of Items": 0
+                        },
+                        {
+                            "Capacity": 10,
+                            "Class name": "Backpack",
+                            "Items": [
+                                {
+                                    "Class_name": "Armour",
+                                    "Item_name": "Diamond helmet",
+                                    "Part": 1,
+                                    "buy_value": 1000,
+                                    "defence": 30,
+                                    "sell_value": 350
+                                },
+                                {
+                                    "Class_name": "Item_saver",
+                                    "Inside items": [
+                                        {
+                                            "Class_name": "Weapon",
+                                            "Item_name": "Grigoriy",
+                                            "buy_value": 1000,
+                                            "damage": 55,
+                                            "sell_value": 333
+                                        }
+                                    ],
+                                    "Item_name": "sword_pack",
+                                    "buy_value": 2000,
+                                    "capacity": 1,
+                                    "sell_value": 833
+                                },
+                                {
+                                    "Class_name": "Valuables",
+                                    "Item_name": "diamond",
+                                    "buy_value": 1000,
+                                    "sell_value": 500
+                                }
+                            ],
+                            "Number of Items": 3
+                        }
+                    ],
+                    "level": 10,
+                    "name": "Strelok"
+                }
+            ],
+            "NPC": null,
+            "Task_description": "You must kill Strelok",
+            "Task_name": "Hunting on Strelok",
+            "award": 500,
+            "perks": null,
+            "type": 2
+        }
+    ]
+}
