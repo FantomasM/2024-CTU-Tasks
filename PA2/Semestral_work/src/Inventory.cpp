@@ -15,6 +15,9 @@ void Inventory::Print(std::ostream &os) {
 
 bool Inventory::Item_saver_use() {
     std::ostringstream os;
+    if(Inv.size()<4){
+    throw std::out_of_range("Wrong count of allocated resources.");
+    }
     if (!Inv[3]->Print_Item_savers(os)) {
         return false;
     }
@@ -79,6 +82,9 @@ bool Inventory::Item_saver_use() {
 }
 
 int Inventory::Use_any_heal_item() {
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     std::shared_ptr<Item> it = Inv[3]->find_any_heal_item();
     if (it != nullptr) {
         const std::shared_ptr<Item> &it2 = it;
@@ -89,19 +95,31 @@ int Inventory::Use_any_heal_item() {
 }
 
 bool Inventory::Put_in_left_hand(std::shared_ptr<Item> &item) {
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     return Inv[0]->Add_Item(item);
 
 }
 
 bool Inventory::Put_in_Right_hand(std::shared_ptr<Item> &item) {
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     return Inv[1]->Add_Item(item);
 }
 
 bool Inventory::Put_on_armour(std::shared_ptr<Item> &item) {
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     return Inv[2]->Add_Item(item);
 }
 
 bool Inventory::Put_in_backpack(std::shared_ptr<Item> &item) {
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     return Inv[3]->Add_Item(item);
 }
 
@@ -277,6 +295,9 @@ void Inventory::item_saver_backpack(std::shared_ptr<Item> &item_saver) {
 
             break;
         } else {
+            if(Inv.size()<4){
+                throw std::out_of_range("Wrong count of allocated resources.");
+            }
             if (Inv[3]->full()) {
                 printw("Backpack is full, you must throw out some items\n");
                 refresh();
@@ -302,6 +323,9 @@ void Inventory::item_saver_backpack(std::shared_ptr<Item> &item_saver) {
                 refresh();
                 continue;
             } else {
+                if(Inv.size()<4){
+                    throw std::out_of_range("Wrong count of allocated resources.");
+                }
                 Inv[3]->Add_Item(item1);
                 item_saver_backpack(item_saver);
                 break;
@@ -317,6 +341,9 @@ bool Inventory::Print(std::ostream &os, int num) {
     if (num < 0 || num > 3) {
         throw std::runtime_error("Trying to access memory out of inventory");
     }
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     Inv[num]->Print_Items(os);
     if (os.fail()) {
         return false;
@@ -325,7 +352,9 @@ bool Inventory::Print(std::ostream &os, int num) {
 }
 
 bool Inventory::Print_heal_items(std::ostream &os) {
-
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     Inv[3]->Print_heal_items(os);
 
     //if ostream is empty return false
@@ -336,6 +365,9 @@ bool Inventory::Print_heal_items(std::ostream &os) {
 }
 
 bool Inventory::Print_Weapons_Backpack(std::ostream &os) {
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     Inv[3]->Print_Weapons(os);
     if (os.fail()) {
         return false;
@@ -344,6 +376,9 @@ bool Inventory::Print_Weapons_Backpack(std::ostream &os) {
 }
 
 bool Inventory::Print_Weapons_Arms(std::ostream &os) {
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     Inv[0]->Print_Weapons(os);
     Inv[1]->Print_Weapons(os);
     if (os.fail()) {
@@ -353,6 +388,9 @@ bool Inventory::Print_Weapons_Arms(std::ostream &os) {
 }
 
 bool Inventory::Print_Armour_Backpack(std::ostream &os) {
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     Inv[3]->Print_Armour(os);
     if (os.fail()) {
         return false;
@@ -365,7 +403,9 @@ bool Inventory::Delete_Item(const std::shared_ptr<Item> &item, int num) {
     if (num < 0 || num > 3) {
         throw std::runtime_error("Trying to access memory out of inventory");
     }
-
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     if (Inv[num]->Remove_Item(item)) {
         return true;
     }
@@ -374,7 +414,9 @@ bool Inventory::Delete_Item(const std::shared_ptr<Item> &item, int num) {
 }
 
 bool Inventory::Use_heal_item(const std::string &name, int &heal_effect) {
-
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     heal_effect = Inv[3]->delete_heal_item(name);
     if (heal_effect != 0) {
         return true;
@@ -387,12 +429,18 @@ std::shared_ptr<Item> Inventory::find_item(const std::string &name, int num) {
     if (num < 0 || num > 3) {
         throw std::runtime_error("Trying to access memory out of inventory");
     }
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
+    }
     return Inv[num]->Find_item(name);
 }
 
 std::shared_ptr<Item> Inventory::find_ref(const std::string &name, int num) {
     if (num < 0 || num > 3) {
         throw std::runtime_error("Trying to access memory out of inventory");
+    }
+    if(Inv.size()<4){
+        throw std::out_of_range("Wrong count of allocated resources.");
     }
     return Inv[num]->find_ref(name);
 }

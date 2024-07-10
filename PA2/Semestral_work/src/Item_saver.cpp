@@ -13,7 +13,7 @@ bool Item_saver::Add_Item(const std::shared_ptr<Item> &item) {
         count_of_items++;
         return true;
     } else {
-        // std::cout <<Item_name <<" is full" <<std::endl;
+
         return false;
     }
 }

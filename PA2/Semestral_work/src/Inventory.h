@@ -13,7 +13,7 @@
 
 class Inventory {
 public:
-    Inventory() {
+    inline Inventory() {
         Inv.reserve(4);
         Inv.emplace_back(std::make_shared<Character_arm>("Left Hand"));
         Inv.emplace_back(std::make_shared<Character_arm>("Right Hand"));

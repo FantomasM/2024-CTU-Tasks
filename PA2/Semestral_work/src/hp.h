@@ -8,10 +8,10 @@
 
 class hp {
 public:
-    hp() : HP(10), MaxHP(10) {}
+    inline hp() : HP(10), MaxHP(10) {}
 
     //Basic hp constructor, in case of hp bigger than MaxHP, MaxHP is set to HP
-    hp(int Hp, int Hpmax) : HP(Hp), MaxHP(Hpmax) {
+    inline hp(int Hp, int Hpmax) : HP(Hp), MaxHP(Hpmax) {
         if (HP > MaxHP) {
             HP = MaxHP;
         }
