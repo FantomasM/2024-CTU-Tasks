@@ -142,7 +142,7 @@ void useless_states_extermination(MISNFA & dfa){
     std::map<std::pair<State, Symbol>, std::set<State>> new_m_Transitions;
     for(const auto & tr : dfa.m_Transitions){
         if(new_m_States.count(tr.first.first)>0){
-            //new_m_Transitions[std::pair<State,Symbol>(tr.first.first,tr.first.second)]=std::set<State>();
+
             for(const auto & tr_to : tr.second){
                 if(visited.count(tr_to)>0){
                     new_m_Transitions[tr.first].insert(tr_to);
@@ -203,15 +203,15 @@ void misnfa_extermination( MISNFA & dfa,bool more_states){
         }
         for(const auto & new_state : back->states_to_go){
             new_State  *new_st=new new_State();
-            // std::cout<<"new states " <<std::endl;
+
             for(const auto & parts : new_state.second){
-                //  std::cout<<parts;
+
                 new_st->new_name_for_state.insert(parts);
                 if(dfa.m_FinalStates.count(parts)>0){
                     new_st->ending= true;
                 }
             }
-            //std::cout<<std::endl;
+
             bool unique= true;
             int identification_tmp;
             for(const auto & states : visited){
@@ -222,8 +222,7 @@ void misnfa_extermination( MISNFA & dfa,bool more_states){
                     break;
                 }
             }
-            //identification++;
-           // new_st->new_name=identification;
+
             back->states_to_go_new_names[new_state.first]=new_st;
             to_delete.push_back(new_st);
             if(unique){
@@ -254,28 +253,13 @@ void misnfa_extermination( MISNFA & dfa,bool more_states){
 
     }
     std::set<State> dfa_states;
-    // std::set<Symbol> m_Alphabet;
+
     std::map<std::pair<State, Symbol>, std::set<State>> m_Transitions;
     std::set<State> m_InitialStates;
     std::set<State> m_FinalStates;
     std::cout<<" size of visited is "<<visited.size() <<std::endl;
     for(const auto & vis : visited){
-       /* std::cout <<"for symbol\n";
-        for(const auto & norm_name : vis->new_name_for_state) {
-             std::cout << norm_name;
-        }
-         std::cout<<std::endl;
 
-        for(const auto & states_names : vis->states_to_go){
-             std::cout<<"for letter " <<states_names.first <<std::endl;
-            for(const auto & states_names_real : states_names.second){
-                std::cout<<states_names_real;
-            }
-            std::cout<<" , ";
-        }
-        std::cout<<std::endl;
-        */
-        // std::cout<<"trying to insert "<<vis.new_name <<std::endl;
         dfa_states.insert(vis->new_name);
         if(vis->starting){
             m_InitialStates.insert(vis->new_name);
@@ -283,9 +267,9 @@ void misnfa_extermination( MISNFA & dfa,bool more_states){
         if(vis->ending){
             m_FinalStates.insert(vis->new_name);
         }
-        // std::cout<<"Creating connection and size of states_to_go_new_names is " << vis->states_to_go_new_names.size()<<"\n";
+
         for(const auto & to : vis->states_to_go_new_names){
-           //  std::cout<<" from " <<vis->new_name <<" via " <<to.first <<" to "<<to.second->new_name <<std::endl;
+           /
             m_Transitions[pair<State,Symbol>(vis->new_name,to.first)].insert(to.second->new_name);
         }
     }
