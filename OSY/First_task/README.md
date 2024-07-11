@@ -112,20 +112,9 @@ Použité třídy a jejich rozhraní:
     faktická implementace v testovacím prostředí je potomkem <tt>CCompany</tt>. Rozhraní třídy
     tedy nemůžete měnit. K dispozici jsou metody:
     <ul>
-      <li><tt>waitForPack</tt> pro načtení dalšího balíku problémů z firmy. Metoda vrátí instanci ke zpracování
-        nebo neplatný ukazatel (smart pointer obsahuje <tt>nullptr</tt>), pokud již nejsou pro tuto firmu
-        další instance balíků problémů ke zpracování. Volání metody může trvat dlouho, proto pro obsluhu musíte vyčlenit
-        oddělené komunikační vlákno, které bude metodu v cyklu volat. Vlákno nesmí provádět žádnou výpočetně náročnou
-        činnost, musí získanou instanci <tt>CProblemPack</tt> předat ke zpracování pracovním vláknům. Kontroluje se, že
-        v jedné instanci firmy volá tuto metodu vždy jedno (stejné) vlákno,</li>
+ <li><tt>waitForPack</tt> pro načtení dalšího balíku problémů z firmy. Metoda vrátí instanci ke zpracování nebo neplatný ukazatel (smart pointer obsahuje <tt>nullptr</tt>), pokud již nejsou pro tuto firmu další instance balíků problémů ke zpracování. Volání metody může trvat dlouho, proto pro obsluhu musíte vyčlenit oddělené komunikační vlákno, které bude metodu v cyklu volat. Vlákno nesmí provádět žádnou výpočetně náročnou činnost, musí získanou instanci <tt>CProblemPack</tt> předat ke zpracování pracovním vláknům. Kontroluje se, že v jedné instanci firmy volá tuto metodu vždy jedno (stejné) vlákno,</li>
 
-      <li><tt>solvedPack</tt> pro předání vyřešené instance <tt>CProblemPack</tt>. Parametrem je vyřešená instance
-        balíku problému dříve získaná z volání <tt>waitForPack</tt>. Protože odevzdání může trvat dlouho, musíte pro
-        odevzdávání vytvořit vyhrazené komunikační vlákno. Vlákno bude přebírat od pracovních vláken vyřešené instance
-        problémů, rozhodne, které balíky problémů jsou zcela vyřešené a zavolá na ně metodu <tt>solvedPack</tt>. Vyřešené
-        instance balíků problémů musí být vracené ve stejném pořadí, ve kterém byly z <tt>waitForPack</tt> převzaté. Předávací
-        vlákno nesmí provádět žádnou výpočetně náročnou činnost. Kontroluje se, že v jedné instanci firmy volá tuto metodu vždy
-        jedno (stejné) vlákno.</li>
+      <li><tt>solvedPack</tt> pro předání vyřešené instance <tt>CProblemPack</tt>. Parametrem je vyřešená instance balíku problému dříve získaná z volání <tt>waitForPack</tt>. Protože odevzdání může trvat dlouho, musíte pro odevzdávání vytvořit vyhrazené komunikační vlákno. Vlákno bude přebírat od pracovních vláken vyřešené instance problémů, rozhodne, které balíky problémů jsou zcela vyřešené a zavolá na ně metodu <tt>solvedPack</tt>. Vyřešené instance balíků problémů musí být vracené ve stejném pořadí, ve kterém byly z <tt>waitForPack</tt> převzaté. Předávací vlákno nesmí provádět žádnou výpočetně náročnou činnost. Kontroluje se, že v jedné instanci firmy volá tuto metodu vždy jedno (stejné) vlákno.</li>
     </ul>
   </li>
 
@@ -140,7 +129,7 @@ Použité třídy a jejich rozhraní:
     <ul>
      <li>konstruktor bez parametrů inicializuje novou instanci třídy. Zatím nevytváří žádná vlákna,</li>
 
-     <li>metodu <tt>addCompany (x)</tt>, tato metoda zaregistruje firmu <tt>x</tt>,</li>
+<li>metodu <tt>addCompany (x)</tt>, tato metoda zaregistruje firmu <tt>x</tt>,</li>
 
      <li>metodu <tt>start ( workThr )</tt>, tato metoda vytvoří komunikační vlákna pro všechny zaregistrované
        firmy a spustí <tt>workThr</tt> pracovních vláken. Po spuštění vláken se metoda <tt>start</tt>
