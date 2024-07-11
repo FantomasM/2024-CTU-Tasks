@@ -78,9 +78,7 @@ void generate_almost_all_combinations_rec(const std::vector<Symbol> & symbols,si
         generate_almost_all_combinations_rec(symbols,i+1,cur,combinations);
         cur.pop_back();
     }
-    // for(size_t i=0;i<len;i++){
-    //  for(size_t)
-    // }
+
 
 
 
@@ -93,13 +91,11 @@ void generate_almost_all_combinations(const std::vector<Symbol> & symbols,std::v
         for(size_t z=i;z<len;z++){
             combination.push_back(symbols[z]);
 
-            //std::vector<Symbol> combination(symbols.begin()+i,symbols.begin()+z+1);
+
             combinations.push_back(combination);
         }
     }
-   // for(size_t i=0;i<len;i++){
-      //  for(size_t)
-   // }
+
 
 
     combinations.push_back(std::vector<Symbol>());
@@ -143,14 +139,7 @@ void epsilon_rules_delete( Grammar & gram){
         for (const auto & term: gram.m_Nonterminals) {
 
             for(const auto & rule : gram.m_Rules){
-                /*
-                if(rule.first==term && !rule.second.empty() && std::all_of(rule.second.begin(),rule.second.end(),[&eps_gen](Symbol a){
-                    if(eps_gen.find(a)!=eps_gen.end()){
-                    return true;
-                }
-                    return false;
-                })){
-                 */
+
                 bool all_same= false;
                 std::cout <<" rule first is " <<rule.first << "term is" <<term <<std::endl;
                 if(rule.first==term && !rule.second.empty()){
@@ -317,15 +306,7 @@ void simple_rules_delete(Grammar & gram){
         }
     }
     gram.m_Rules=new_m_Rules;
-    /*
-    for(const auto & sym : closure){
-        std::cout <<"from " <<sym.first <<" to ";
-        for(const auto & to : sym.second){
-            std::cout <<" " <<to <<" ";
-        }
-        std::cout <<std::endl;
-    }
-     */
+
     for(const auto & rule : new_m_Rules){
         std::cout <<"from " <<rule.first <<" to ";
         for(const auto & to : rule.second){
@@ -497,19 +478,7 @@ void postorder_inner(const Symbol_track & sym,std::vector<size_t> & trace_1){
 
 std::vector<size_t> trace(const Grammar& gram, const Word & word){
     Grammar  grammar=gram;
-   // epsilon_rules_delete(grammar);
-   // simple_rules_delete(grammar);
-   // deletion_of_not_gen_symbols(grammar);
-   // unreachable_symbols_deletion(grammar);
-   /* std::cout <<"Final res is \n";
-    for(const auto & rule : grammar.m_Rules){
-        std::cout <<"from " <<rule.first <<" to ";
-        for(const auto & to : rule.second){
-            std::cout<<" " <<to <<" ";
-        }
-        std::cout<<std::endl;
-    }
-    */
+
     ///CYK parse
     int size_word=(int)word.size();
 
@@ -576,20 +545,13 @@ std::vector<size_t> trace(const Grammar& gram, const Word & word){
                             to_ins[0].rule_number=rhs.first;
                             to_ins[0].last= false;
                             auto iter=(Array[j][k].find(tmp[0]));
-                         //   to_ins[0].first_rod=std::addressof(*iter);
+
                             to_ins[0].first_rod=&(*iter);
                             iter=(Array[k+1][i].find(tmp[1]));
                             to_ins[0].second_rod=&(*iter);
-                           /* if(Array[j][i].find(to_ins[0])!=Array[j][i].end()){
-                                if(rhs.first< Array[j][i].find(to_ins[0])->rule_number){
-                                    Array[j][i].erase(to_ins[0]);
-                                    Array[j][i].insert(to_ins[0]);
-                                }
-                            }
-                            */
-                           // else {
+
                                 Array[j][i].insert(to_ins[0]);
-                            //}
+
 
                         }
                         rhs_index++;
@@ -635,7 +597,7 @@ std::vector<size_t> trace(const Grammar& gram, const Word & word){
             }
         }
         if(Yes) {
-            //std::cout << "Vyslo \n";
+
             return trace_ret;
         }
         else{
@@ -645,23 +607,7 @@ std::vector<size_t> trace(const Grammar& gram, const Word & word){
         }
 
 
-        for(const auto & row : Array){
-            for(const auto & col : row.second){
-                std::cout<<" From [" <<row.first<<","<<col.first<<"]: ";
-                for(Symbol_track sym : col.second){
-                    char ruleindex=sym.symbol;
-                    if(!sym.last) {
-                        std::cout << ruleindex << " was created by " << sym.first_rod->symbol << " and " << sym.second_rod->symbol
-                                  << " v kroku " << sym.step <<" | ";
-                    }
-                    else{
-                        std::cout << ruleindex << "was created v kroku " << sym.step <<" | ";
-                    }
-                }
-                std::cout<<std::endl;
-            }
 
-        }
 
     }
     else{
@@ -673,187 +619,82 @@ std::vector<size_t> trace(const Grammar& gram, const Word & word){
 }
 
 #ifndef __PROGTEST__
-/*
+
+
+
 int main()
 {
-
-    Grammar test0{
-            {'S','A','B','C'},
-            {'a','b'},
-            {
-                    {'S', {'A', 'B', 'C'}},
-
-                    {'A',{'a','A'}},
-                    {'A',{}},
-                    {'B',{'A'}},
-                    {'B',{'b','b'}},
-                    {'C',{}}
-            },
-            'S'};
-
-
-    //epsilon_rules_delete(test0);
-
-    Grammar test1{
-            {'S','A','B','C','D'},
-            {'a','b','c','d'},
-            {
-                    {'S',{'A'}},
-                    {'S',{'B'}},
-                    {'A',{'C'}},
-                    {'A',{'a','A'}},
-                    {'A',{'b','S'}},
-                    {'B',{'D'}},
-                    {'B',{'c','B'}},
-                    {'B',{'d','S'}},
-                    {'C',{'b','C'}},
-                    {'C',{'a'}},
-                    {'D',{'d','D'}},
-                    {'D',{'c'}}
-            },
-            'S'
-    };
-    //simple_rules_delete(test1);
-
-    Grammar test2{
-            {'S','A','B','C','D'},
-            {'a','b','c'},
-            {
-                    {'S',{'A','B'}},
-                    {'S',{'C'}},
-                    {'A',{'a','A'}},
-                    {'A',{'a'}},
-                    {'B',{'b','B'}},
-                    {'C',{'c'}},
-                    {'D',{'b','c'}}
-            },
-            'S'
-    };
-    Grammar test3{
-            {'S','A','B','C'},
-            {'a','b'},
-            {
-                    {'S', {'A', 'B'}},
-                    {'S', {'B', 'C'}},
-                    {'A', {'B', 'A'}},
-                    {'A', {'a'}},
-                    {'B', {'C', 'C'}},
-                    {'B', {'b'}},
-                    {'C', {'A', 'B'}},
-                    {'C', {'a'}},
-            },
-
-
-    'S'};
-   std::vector<size_t> ran=trace(test3,{'b', 'a', 'a', 'b', 'a'});
-   // deletion_of_not_gen_symbols(test2);
-    //unreachable_symbols_deletion(test2);
-
-    Grammar g0{
-        {'A', 'B', 'C', 'S'},
-        {'a', 'b'},
-        {
-            {'S', {'A', 'B'}},
-            {'S', {'B', 'C'}},
-            {'A', {'B', 'A'}},
-            {'A', {'a'}},
-            {'B', {'C', 'C'}},
-            {'B', {'b'}},
-            {'C', {'A', 'B'}},
-            {'C', {'a'}},
-        },
-        'S'};
-   // std::vector<size_t> ran=trace(g0,{'b', 'a', 'a', 'b', 'a'});
-    //std::vector<size_t> ran_2=trace(g0,{'b'});
-    trace(g0, {'b', 'a', 'a', 'b', 'a'});
-    trace(g0, {'b'});
-    trace(g0, {'a'});
-    trace(g0, {});
-    trace(g0, {'a', 'a', 'a', 'a', 'a'});
-    trace(g0, {'a', 'b'});
-    trace(g0, {'b', 'a'});
-    trace(g0, {'c', 'a'});
-
-
-
-   // assert(trace(g0, {'b', 'a', 'a', 'b', 'a'}) == std::vector<size_t>({0, 2, 5, 3, 4, 6, 3, 5, 7}));
-    assert(trace(g0, {'b'}) == std::vector<size_t>({}));
-    assert(trace(g0, {'a'}) == std::vector<size_t>({}));
-    assert(trace(g0, {}) == std::vector<size_t>({}));
-    assert(trace(g0, {'a', 'a', 'a', 'a', 'a'}) == std::vector<size_t>({1, 4, 6, 3, 4, 7, 7, 7, 7}));
-    assert(trace(g0, {'a', 'b'}) == std::vector<size_t>({0, 3, 5}));
-    assert(trace(g0, {'b', 'a'}) == std::vector<size_t>({1, 5, 7}));
-    assert(trace(g0, {'c', 'a'}) == std::vector<size_t>({}));
-
-    Grammar g1{
-        {'A', 'B'},
-        {'x', 'y'},
-        {
-            {'A', {}},
-            {'A', {'x'}},
-            {'B', {'x'}},
-            {'A', {'B', 'B'}},
-            {'B', {'B', 'B'}},
-        },
-        'A'};
-
-    assert(trace(g1, {}) == std::vector<size_t>({0}));
-    assert(trace(g1, {'x'}) == std::vector<size_t>({1}));
-    assert(trace(g1, {'x', 'x'}) == std::vector<size_t>({3, 2, 2}));
-    assert(trace(g1, {'x', 'x', 'x'}) == std::vector<size_t>({3, 4, 2, 2, 2}));
-    assert(trace(g1, {'x', 'x', 'x', 'x'}) == std::vector<size_t>({3, 4, 4, 2, 2, 2, 2}));
-    assert(trace(g1, {'x', 'x', 'x', 'x', 'x'}) == std::vector<size_t>({3, 4, 4, 4, 2, 2, 2, 2, 2}));
-    assert(trace(g1, {'x', 'x', 'x', 'x', 'x', 'x'}) == std::vector<size_t>({3, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2}));
-    assert(trace(g1, {'x', 'x', 'x', 'x', 'x', 'x', 'x'}) == std::vector<size_t>({3, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2}));
-    assert(trace(g1, {'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'}) == std::vector<size_t>({3, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2}));
-    assert(trace(g1, {'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'}) == std::vector<size_t>({3, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2}));
-
-    Grammar g2{
-        {'A', 'B'},
-        {'x', 'y'},
-        {
-            {'A', {'x'}},
-            {'B', {'x'}},
-            {'A', {'B', 'B'}},
-            {'B', {'B', 'B'}},
-        },
-        'B'};
-
-    assert(trace(g2, {}) == std::vector<size_t>({}));
-    assert(trace(g2, {'x'}) == std::vector<size_t>({1}));
-    assert(trace(g2, {'x', 'x'}) == std::vector<size_t>({3, 1, 1}));
-    assert(trace(g2, {'x', 'x', 'x'}) == std::vector<size_t>({3, 3, 1, 1, 1}));
-
-    Grammar g3{
-        {'A', 'B', 'C', 'D', 'E', 'S'},
-        {'a', 'b'},
-        {
-            {'S', {'A', 'B'}},
-            {'S', {'S', 'S'}},
-            {'S', {'a'}},
-            {'A', {'B', 'S'}},
-            {'A', {'C', 'D'}},
-            {'A', {'b'}},
-            {'B', {'D', 'D'}},
-            {'B', {'b'}},
-            {'C', {'D', 'E'}},
-            {'C', {'b'}},
-            {'C', {'a'}},
-            {'D', {'a'}},
-            {'E', {'S', 'S'}},
-        },
-        'S'};
-
-    assert(trace(g3, {}) == std::vector<size_t>({}));
-    assert(trace(g3, {'b'}) == std::vector<size_t>({}));
-    assert(trace(g3, {'a', 'b', 'a', 'a', 'b'}) == std::vector<size_t>({1, 2, 0, 3, 7, 1, 2, 2, 7}));
-    assert(trace(g3, {'a', 'b', 'a', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'a'}) == std::vector<size_t>({1, 1, 0, 4, 8, 11, 12, 0, 5, 6, 11, 11, 0, 4, 9, 11, 7, 11, 7, 2, 2}));
-
-}
-*/
-int main()
+Grammar test0{
+{'S','A','B','C'},
+{'a','b'},
 {
-    /*
+{'S', {'A', 'B', 'C'}},
+
+{'A',{'a','A'}},
+{'A',{}},
+{'B',{'A'}},
+{'B',{'b','b'}},
+{'C',{}}
+},
+'S'};
+
+
+//epsilon_rules_delete(test0);
+
+Grammar test1{
+{'S','A','B','C','D'},
+{'a','b','c','d'},
+{
+{'S',{'A'}},
+{'S',{'B'}},
+{'A',{'C'}},
+{'A',{'a','A'}},
+{'A',{'b','S'}},
+{'B',{'D'}},
+{'B',{'c','B'}},
+{'B',{'d','S'}},
+{'C',{'b','C'}},
+{'C',{'a'}},
+{'D',{'d','D'}},
+{'D',{'c'}}
+},
+'S'
+};
+
+
+Grammar test2{
+{'S','A','B','C','D'},
+{'a','b','c'},
+{
+{'S',{'A','B'}},
+{'S',{'C'}},
+{'A',{'a','A'}},
+{'A',{'a'}},
+{'B',{'b','B'}},
+{'C',{'c'}},
+{'D',{'b','c'}}
+},
+'S'
+};
+Grammar test3{
+{'S','A','B','C'},
+{'a','b'},
+{
+{'S', {'A', 'B'}},
+{'S', {'B', 'C'}},
+{'A', {'B', 'A'}},
+{'A', {'a'}},
+{'B', {'C', 'C'}},
+{'B', {'b'}},
+{'C', {'A', 'B'}},
+{'C', {'a'}},
+},
+
+
+'S'};
+std::vector<size_t> ran=trace(test3,{'b', 'a', 'a', 'b', 'a'});
+
+
     Grammar g0{
             {'A', 'B', 'C', 'S'},
             {'a', 'b'},
@@ -877,7 +718,7 @@ int main()
     assert(trace(g0, {'a', 'b'}) == std::vector<size_t>({0, 3, 5}));
     assert(trace(g0, {'b', 'a'}) == std::vector<size_t>({1, 5, 7}));
     assert(trace(g0, {'c', 'a'}) == std::vector<size_t>({}));
-    */
+
     Grammar g1{
             {'A', 'B'},
             {'x', 'y'},
