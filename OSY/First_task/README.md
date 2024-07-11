@@ -114,9 +114,8 @@ Použité třídy a jejich rozhraní:
     <ul>
  <li><tt>waitForPack</tt> pro načtení dalšího balíku problémů z firmy. Metoda vrátí instanci ke zpracování nebo neplatný ukazatel (smart pointer obsahuje <tt>nullptr</tt>), pokud již nejsou pro tuto firmu další instance balíků problémů ke zpracování. Volání metody může trvat dlouho, proto pro obsluhu musíte vyčlenit oddělené komunikační vlákno, které bude metodu v cyklu volat. Vlákno nesmí provádět žádnou výpočetně náročnou činnost, musí získanou instanci <tt>CProblemPack</tt> předat ke zpracování pracovním vláknům. Kontroluje se, že v jedné instanci firmy volá tuto metodu vždy jedno (stejné) vlákno,</li>
 
-      <li><tt>solvedPack</tt> pro předání vyřešené instance <tt>CProblemPack</tt>. Parametrem je vyřešená instance balíku problému dříve získaná z volání <tt>waitForPack</tt>. Protože odevzdání může trvat dlouho, musíte pro odevzdávání vytvořit vyhrazené komunikační vlákno. Vlákno bude přebírat od pracovních vláken vyřešené instance problémů, rozhodne, které balíky problémů jsou zcela vyřešené a zavolá na ně metodu <tt>solvedPack</tt>. Vyřešené instance balíků problémů musí být vracené ve stejném pořadí, ve kterém byly z <tt>waitForPack</tt> převzaté. Předávací vlákno nesmí provádět žádnou výpočetně náročnou činnost. Kontroluje se, že v jedné instanci firmy volá tuto metodu vždy jedno (stejné) vlákno.</li>
+<li><tt>solvedPack</tt> pro předání vyřešené instance <tt>CProblemPack</tt>. Parametrem je vyřešená instance balíku problému dříve získaná z volání <tt>waitForPack</tt>. Protože odevzdání může trvat dlouho, musíte pro odevzdávání vytvořit vyhrazené komunikační vlákno. Vlákno bude přebírat od pracovních vláken vyřešené instance problémů, rozhodne, které balíky problémů jsou zcela vyřešené a zavolá na ně metodu <tt>solvedPack</tt>. Vyřešené instance balíků problémů musí být vracené ve stejném pořadí, ve kterém byly z <tt>waitForPack</tt> převzaté. Předávací vlákno nesmí provádět žádnou výpočetně náročnou činnost. Kontroluje se, že v jedné instanci firmy volá tuto metodu vždy jedno (stejné) vlákno.</li>
     </ul>
-  </li>
 
   <li><tt>CBigInt</tt> je třída implementující velká celá kladná čísla. Čísla jsou reprezentovaná binárně pomocí
     1024 bitů. Třída je implementovaná jednak v testovacím prostředí a dále je k dispozici i v dodané knihovně. Implementace
@@ -131,28 +130,28 @@ Použité třídy a jejich rozhraní:
 
 <li>metodu <tt>addCompany (x)</tt>, tato metoda zaregistruje firmu <tt>x</tt>,</li>
 
-     <li>metodu <tt>start ( workThr )</tt>, tato metoda vytvoří komunikační vlákna pro všechny zaregistrované
+<li>metodu <tt>start ( workThr )</tt>, tato metoda vytvoří komunikační vlákna pro všechny zaregistrované
        firmy a spustí <tt>workThr</tt> pracovních vláken. Po spuštění vláken se metoda <tt>start</tt>
        vrátí zpět do volajícího,</li>
 
-     <li>metodu <tt>stop</tt>, která počká na dokončení obsluhy firem a ukončení vytvořených
+<li>metodu <tt>stop</tt>, která počká na dokončení obsluhy firem a ukončení vytvořených
        vláken. Po tomto se volání <tt>stop</tt> vrátí zpět do volajícího,</li>
 
-     <li>metoda <tt>usingProgtestSolver()</tt> vrátí hodnotu <tt>true</tt>, pokud pro vlastní řešení
+<li>metoda <tt>usingProgtestSolver()</tt> vrátí hodnotu <tt>true</tt>, pokud pro vlastní řešení
        problémů používáte dodaný řešič <tt>CProgtestSolver</tt> nebo hodnotu <tt>false</tt> pokud
        celý výpočet implementujete vlastním kódem. Pokud tato metoda vrací <tt>true</tt>, testovací prostředí
        nepoužívá metody <tt>COptimizer::checkAlgorithmMin()</tt> a <tt>COptimizer::checkAlgorithmCnt()</tt>
        níže (můžete je ponechat prázdné). Pokud metoda vrací <tt>false</tt>, testovací prostředí upraví chování
        poskytovaného řešiče <tt>CProgtestSolver</tt> tak, že úmyslně vyplňuje nesprávné výsledky.</li>
 
-     <li>třídní metodu <tt>checkAlgorithmMin(polygon)</tt>. Metoda slouží k otestování správnosti vlastního algoritmu
+<li>třídní metodu <tt>checkAlgorithmMin(polygon)</tt>. Metoda slouží k otestování správnosti vlastního algoritmu
        výpočtu. Parametrem volání je jedna instance <tt>CPolygon</tt>. Kód metody zajistí potřebné výpočty a vyplní
        složku <tt>m_TriangMin</tt> v instanci <tt>polygon</tt>. Kromě kontroly správnosti implementovaných algoritmů
        se metoda používá ke kalibraci rychlosti vašeho řešení. Rychlosti se přizpůsobí velikost zadávaných problémů,
        aby testování trvalo rozumně dlouhou dobu. Metodu implementujte pouze pokud nepoužíváte dodaný řešič problémů
        <tt>CProgtestSolver</tt> (tedy pokud Vaše metoda <tt>COptimizer::usingProgtestSolver()</tt> vrací <tt>false</tt>),</li>
 
-     <li>třídní metodu <tt>checkAlgorithmCnt(polygon)</tt>. Metoda slouží k otestování správnosti vlastního algoritmu
+<li>třídní metodu <tt>checkAlgorithmCnt(polygon)</tt>. Metoda slouží k otestování správnosti vlastního algoritmu
        výpočtu. Parametrem volání je jedna instance <tt>CPolygon</tt>. Kód metody zajistí potřebné výpočty a vyplní
        složku <tt>m_TriangCnt</tt> v instanci <tt>polygon</tt>. Kromě kontroly správnosti implementovaných algoritmů
        se metoda používá ke kalibraci rychlosti vašeho řešení. Rychlosti se přizpůsobí velikost zadávaných problémů,
