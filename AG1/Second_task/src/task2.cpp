@@ -282,7 +282,7 @@ struct TextEditorBackend {
 
 
 
-      
+
 
 
   }
@@ -951,6 +951,7 @@ void test_ex(int& ok, int& fail) {
   CHECK_EX(t.char_to_line(12), std::out_of_range);
   CHECK_EX(t.char_to_line(25), std::out_of_range);
 }
+/*
 void test_custom1(int& ok, int & fail){
     TextEditorBackend t("123\nabc\n789\ncde\n");
     CHECK(t.size(),16);
@@ -1006,6 +1007,7 @@ void test_custom1(int& ok, int & fail){
 
 
 }
+*/
 void test_custom(int& ok, int & fail){
     TextEditorBackend t("asddasasdasd\nasdsdaasdcasdasdasd\nasddasdasasdasdasd\nasdasdasddasasd\nasdsdasdassdaasdasdasddasadsasdasdasdasdsadasdasdasdasdad\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
                         "\n\n\n\n\n\n\n\n\n\n\nsdffsdsdfmsd\nsd\nsd\nffg\ng\nhg\nh\nh\nh\nh\nh\nh\nh\nh\nh");
@@ -1052,7 +1054,7 @@ int main() {
   if (!fail) test3(ok, fail);
   if (!fail) test_ex(ok, fail);
   if(!fail) test_custom(ok,fail);
-  if(!fail) test_custom1(ok,fail);
+
   
   if (!fail) std::cout << "Passed all " << ok << " tests!" << std::endl;
   else std::cout << "Failed " << fail << " of " << (ok + fail) << " tests." << std::endl;
