@@ -282,7 +282,7 @@ struct TextEditorBackend {
 
 
 
-      ///Approach when we try to insert on left side of cur node with index value -- not working
+      /
 
 
   }
@@ -452,7 +452,7 @@ struct TextEditorBackend {
       /// Dividing situation into three cases
       char ret=ptr->value;
 
-      ///1: No children /lucky man/leaf
+      ///1: No children
 
       if(ptr->right== nullptr && ptr->left== nullptr){
           ///Disconect ptr from father and change height of father plus delete node
@@ -544,7 +544,7 @@ struct TextEditorBackend {
 
 
       }
-      ///3: two children worst case scenario :(
+      ///3: two children worst case scenario
       if(ptr!= nullptr && ptr->right!= nullptr && ptr->left!= nullptr){ /// clang tidy was upset about me adding else if branch, dont know why, so i've added not null test
 
           ///Finding successor of cur node to replace
@@ -628,7 +628,7 @@ struct TextEditorBackend {
         }
       size_tree--;
   }
-    ////////////////// Light magic, ignore please////////////////////////
+
     size_t rank(My_Node * ptr)const {
 
         My_Node * tmp=ptr;
@@ -1043,43 +1043,7 @@ void test_custom(int& ok, int & fail){
 
 int main() {
   int ok = 0, fail = 0;
-/*
-  TextEditorBackend t("ab");
-  t.erase(0);
-  std::cout <<t.char_to_line(0) <<std::endl;
-  t.erase(0);
-    for(size_t i=0;i<t.lines();i++){
-        std::cout <<"line starts at " <<t.line_start(i) <<"and has length " <<t.line_length(i) <<std::endl;
-    }
-    for(size_t i=0;i<t.size();i++){
-        std::cout <<" on position " <<i << " is " <<t.at(i) <<" line is " <<t.char_to_line(i) <<"and it lies on line "<<t.char_to_line(i) <<std::endl;
-    }
 
-
-  std::cout <<"count of signs"<<t.size() <<std::endl;
-  std::cout <<"last line starts at " <<t.line_start(10) <<"and it has length " <<t.line_length(10)  <<std::endl;
-
-    std::cout <<"count of lines after is "<<t.lines() <<std::endl;
-    std::cout <<"last line starts at " <<t.line_start(9) <<"and it has length " <<t.line_length(9) <<std::endl;
-  for(size_t i=0;i<t.size();i++){
-     // std::cout <<" on position " <<i << " is " <<t.at(i) <<" line is " <<t.char_to_line(i) <<std::endl;
-  }
-
-    for(size_t i=0;i<t.lines();i++){
-     std::cout <<"line starts at " <<t.line_start(i) <<"and has length " <<t.line_length(i) <<std::endl;
-    }
-    size_t k=t.size();
-    for(size_t i=0;i<k;i++){
-        t.erase(0);
-    }
-    std::cout <<"-------------------------------------------------------------\n";
-    for(size_t i=0;i<t.lines();i++){
-        std::cout <<"line starts at " <<t.line_start(i) <<"and has length " <<t.line_length(i) <<std::endl;
-    }
-    for(size_t i=0;i<t.size();i++){
-         std::cout <<" on position " <<i << " is " <<t.at(i) <<" line is " <<t.char_to_line(i) <<"and it lies on line "<<t.char_to_line(i) <<std::endl;
-    }
-*/
 
 
 
@@ -1087,8 +1051,8 @@ int main() {
   if (!fail) test2(ok, fail);
   if (!fail) test3(ok, fail);
   if (!fail) test_ex(ok, fail);
- // if(!fail) test_custom(ok,fail);
- // if(!fail) test_custom1(ok,fail);
+  if(!fail) test_custom(ok,fail);
+  if(!fail) test_custom1(ok,fail);
   
   if (!fail) std::cout << "Passed all " << ok << " tests!" << std::endl;
   else std::cout << "Failed " << fail << " of " << (ok + fail) << " tests." << std::endl;
